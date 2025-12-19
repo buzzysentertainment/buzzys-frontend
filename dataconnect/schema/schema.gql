@@ -1,0 +1,47 @@
+type User @table {
+  displayName: String!
+  email: String!
+  userType: String!
+  phoneNumber: String
+  address: String
+}
+
+type Inflatable @table {
+  name: String!
+  description: String!
+  pricePerDay: Float!
+  category: String!
+  imageUrl: String!
+  owner: User
+  dimensions: String
+  capacity: Int
+  theme: String
+}
+
+type Booking @table {
+  customer: User!
+  bookingDate: Timestamp!
+  startDate: Date!
+  endDate: Date!
+  totalPrice: Float!
+  deliveryAddress: String!
+  status: String!
+  notes: String
+  paymentConfirmationId: String
+}
+
+type BookingItem @table(key: ["booking", "inflatable"]) {
+  booking: Booking!
+  inflatable: Inflatable!
+  quantity: Int!
+  itemPrice: Float!
+  specialInstructions: String
+}
+
+type Review @table {
+  customer: User!
+  inflatable: Inflatable
+  rating: Int!
+  comment: String!
+  createdAt: Timestamp!
+}

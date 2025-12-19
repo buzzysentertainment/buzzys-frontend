@@ -1,0 +1,31 @@
+mutation AddInflatable @auth(level: USER) {
+  inflatable_insert(data: {
+    name: "New Inflatable",
+    description: "A brand new inflatable",
+    imageUrl: "https://example.com/new-inflatable.jpg",
+    category: "Bounce House",
+    pricePerDay: 100.0,
+    ownerId_expr: "auth.uid"
+  })
+}
+
+query ListInflatables @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  inflatables {
+    id
+    name
+    description
+    imageUrl
+    category
+    pricePerDay
+  }
+}
+
+mutation UpdateInflatable($id: UUID!, $pricePerDay: Float) @auth(level: USER) {
+  inflatable_update(key: {id: $id}, data: {
+    pricePerDay: $pricePerDay
+  })
+}
+
+mutation DeleteInflatable($id: UUID!) @auth(level: USER) {
+  inflatable_delete(key: {id: $id})
+}

@@ -1,0 +1,90 @@
+mutation SeedDatabase @auth(level: PUBLIC, insecureReason: "This mutation is used to populate the database with seed data, and is safe to expose to the public") @transaction {
+  user_insertMany(data: [
+    {
+      id: "550e8400-e29b-41d4-a716-446655440000",
+      displayName: "Demo User 1",
+      email: "demo1@example.com",
+      userType: "customer"
+    },
+    {
+      id: "550e8400-e29b-41d4-a716-446655440001",
+      displayName: "Demo User 2",
+      email: "demo2@example.com",
+      userType: "owner"
+    }
+  ])
+  inflatable_insertMany(data: [
+    {
+      id: "650e8400-e29b-41d4-a716-446655440002",
+      name: "Bouncy Castle",
+      description: "A fun bouncy castle for kids.",
+      category: "bouncy_castle",
+      pricePerDay: 50.0,
+	  imageUrl: "http://example.com/bouncycastle.jpg"
+      ownerId: "550e8400-e29b-41d4-a716-446655440001"
+    },
+    {
+      id: "750e8400-e29b-41d4-a716-446655440003",
+      name: "Water Slide",
+      description: "A thrilling water slide for hot days.",
+      category: "water_slide",
+      pricePerDay: 75.0,
+	  imageUrl: "http://example.com/waterslide.jpg",
+      ownerId: "550e8400-e29b-41d4-a716-446655440001"
+    }
+  ])
+  booking_insertMany(data: [
+    {
+      id: "850e8400-e29b-41d4-a716-446655440004",
+      customerId: "550e8400-e29b-41d4-a716-446655440000",
+      bookingDate: "2024-01-20T10:00:00Z",
+      startDate: "2024-02-01",
+      endDate: "2024-02-03",
+      deliveryAddress: "123 Main St",
+      status: "confirmed",
+      totalPrice: 100.0
+    },
+    {
+      id: "950e8400-e29b-41d4-a716-446655440005",
+      customerId: "550e8400-e29b-41d4-a716-446655440000",
+      bookingDate: "2024-01-25T14:00:00Z",
+      startDate: "2024-02-15",
+      endDate: "2024-02-17",
+      deliveryAddress: "456 Elm St",
+      status: "pending",
+      totalPrice: 75.0
+    }
+  ])
+  bookingItem_insertMany(data: [
+    {
+      bookingId: "850e8400-e29b-41d4-a716-446655440004",
+      inflatableId: "650e8400-e29b-41d4-a716-446655440002",
+      itemPrice: 50.0,
+      quantity: 2
+    },
+    {
+      bookingId: "950e8400-e29b-41d4-a716-446655440005",
+      inflatableId: "750e8400-e29b-41d4-a716-446655440003",
+      itemPrice: 75.0,
+      quantity: 1
+    }
+  ])
+  review_insertMany(data: [
+    {
+      id: "a50e8400-e29b-41d4-a716-446655440006",
+      customerId: "550e8400-e29b-41d4-a716-446655440000",
+      inflatableId: "650e8400-e29b-41d4-a716-446655440002",
+      comment: "Great bouncy castle!",
+      createdAt: "2024-02-03T12:00:00Z",
+      rating: 5
+    },
+    {
+      id: "b50e8400-e29b-41d4-a716-446655440007",
+      customerId: "550e8400-e29b-41d4-a716-446655440000",
+      inflatableId: "750e8400-e29b-41d4-a716-446655440003",
+      comment: "Awesome water slide!",
+      createdAt: "2024-02-17T16:00:00Z",
+      rating: 4
+    }
+  ])
+}

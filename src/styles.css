@@ -1,0 +1,251 @@
+/* --- GLOBAL --- */
+body {
+  margin: 0;
+  background-color: #fffdf5 !important;
+  padding-top: 100px !important; /* Fixed: Prevents header from covering content */
+  font-family: sans-serif;
+}
+
+/* --- HEADER (FIXED & BOLD) --- */
+.header {
+  background-color: #fff3c4 !important;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  z-index: 9999 !important;
+  border-bottom: 5px solid #000 !important;
+  padding: 15px 0 !important;
+  display: flex !important; /* Added to align container */
+  align-items: center !important;
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100%;
+}
+
+.nav-links {
+  display: flex !important;
+  flex-direction: row !important; /* Fixed: Stops links from stacking vertically */
+  gap: 20px !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.nav-item, .cart-btn {
+  text-decoration: none !important;
+  color: #000 !important;
+  font-weight: 800 !important;
+  white-space: nowrap !important;
+}
+/* --- BUBBLY TITLE STYLING --- */
+.buzzy-title {
+	font-size: 3.5rem !important;
+	font-weight: 900 !important;
+	color: #000 !important;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	text-shadow:
+	  3px 3px 0px #ffb300, 
+	  6px 6px 0px rgba(0,0,0,0.1);
+	-webkit-text-stroke: 1px #000 ;
+	display: inline-block;
+	transition: transform 0.3s ease;
+}
+.buzzy-title:hover {
+  transform: scale(1.05) rotate(-1deg);
+  color: #ffb300 !important;
+  text-shadow: 3px 3px 0px #000;
+}
+
+	  
+	
+/* --- BUZZY TOP SECTION --- */
+.buzzy-section {
+  background: #fff8d9;
+  padding: 3rem 1.5rem;
+  margin: 2rem auto;
+  border-radius: 30px;
+  max-width: 1200px; /* Fixed: Added missing value that caused the crash */
+  border: 4px solid #000;
+  
+  
+/* BUBBLY TEXT STYLES */
+  text-align: center;
+  color: #4a3728;
+  font-weight:800;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  letter-spacing: 0.5px;
+  text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(0,0,0,0.05);
+}
+.buzzy-section h2, .buzzy-section h3 {
+	font-size: 2.5rem;
+	text-transform: uppercase;
+	color: #ffb300;
+	-webkit-text-stroke: 1.5px #000;
+	filter: drop-shadow(3px 3px 0px #000);
+}
+/* --- HOME PAGE SHIELD --- */
+.home-page {
+  display: block !important;
+  text-align: center !important;
+}
+
+/* --- CART PAGE SHIELD --- */
+.cart-page-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+/* This is the 50/50 split for the cart */
+.cart-split-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 60px !important;
+  text-align: left !important;
+}
+
+/* ITEM CARDS */
+.cart-items-list {
+  background: white !important;
+  padding: 30px !important;
+  border-radius: 40px !important;
+  border: 5px solid #000 !important;
+  box-shadow: 10px 10px 0px #ffd84d !important;
+}
+.cart-item-image {
+  width: 120px;
+  height: auto;
+  border-radius: 12px;
+  border: 4px solid #000;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* INFLATABLE CARDS (RESTORED GRID) */
+.inflatable-card img {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+
+.inflatable-card {
+  width: 250px;
+  padding: 20px;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  text-align: center;
+  border: 1px solid #eee; /* Light border to define shape */
+}
+.inflatable-card button, .btn-book {
+  background-color: #ffd84d !important; /* Bright Yellow */
+  color: #000 !important;
+  font-family: 'Inter', sans-serif;
+  font-weight: 900 !important;
+  font-size: 1.1rem !important;
+  text-transform: uppercase;
+  
+  /* The "Bubble" Shape */
+  padding: 12px 25px !important;
+  border-radius: 50px !important; /* Makes it a pill shape */
+  border: 4px solid #000 !important; /* Thick cartoon outline */
+  
+  /* 3D Depth Shadow */
+  box-shadow: 0 6px 0px #000 !important;
+  
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+/* "Press" Effect when clicking */
+.inflatable-card button:active, .btn-book:active {
+  box-shadow: 0 2px 0px #000 !important;
+  transform: translateY(4px);
+}
+
+/* "Inflate" effect on hover */
+.inflatable-card button:hover, .btn-book:hover {
+  background-color: #ffea00 !important;
+  transform: scale(1.05);
+}
+/* This ensures home page cards stay horizontal */
+.card-container, .pricing-container {
+  display: flex !important;
+  flex-direction: row !important; 
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 30px !important;
+  padding: 40px !important;
+}
+
+/* FORM BOXES */
+.checkout-form-container {
+  background: white !important;
+  padding: 30px !important;
+  border-radius: 40px !important;
+  border: 5px solid #000 !important;
+}
+
+.booking-form input, 
+.booking-form select, 
+.booking-form textarea {
+  width: 100% !important;
+  padding: 20px !important;
+  font-size: 1.2rem !important;
+  font-weight: 800 !important;
+  border: 4px solid #000 !important;
+  border-radius: 20px !important;
+  box-sizing: border-box !important;
+  margin-bottom: 20px !important;
+}
+
+.btn-confirm {
+  width: 100% !important;
+  background-color: #ffd84d !important;
+  padding: 25px !important;
+  font-size: 1.8rem !important;
+  font-weight: 900 !important;
+  border: 4px solid #000 !important;
+  border-radius: 40px !important;
+  cursor: pointer;
+}
+/* --- CLEANER, SMALLER FORM FIELDS FOR CART PAGE --- */
+.checkout-form-container .booking-form input,
+.checkout-form-container .booking-form select,
+.checkout-form-container .booking-form textarea {
+  padding: 10px 14px !important;     /* smaller padding */
+  font-size: 1rem !important;        /* smaller text */
+  font-weight: 700 !important;       /* still bold, but less chunky */
+  border-radius: 12px !important;    /* smaller bubble */
+  margin-bottom: 14px !important;    /* tighter spacing */
+}
+
+/* Make textarea less tall */
+.checkout-form-container .booking-form textarea {
+  min-height: 80px !important;
+}
+
+/* Smaller, cleaner confirm button */
+.checkout-form-container .btn-confirm {
+  padding: 14px !important;
+  font-size: 1.2rem !important;
+  border-radius: 20px !important;
+}
+
+@media
