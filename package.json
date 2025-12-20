@@ -2,6 +2,7 @@
   "name": "buzzys-frontend",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [],
   "dependencies": {
     "@dataconnect/generated": "file:src/dataconnect-generated",
     "@testing-library/dom": "^10.4.1",
