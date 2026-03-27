@@ -1,0 +1,41 @@
+.media-library-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+}
+
+.media-library-item {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 8px;
+  background: #fff;
+}
+
+.media-thumb img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.media-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.media-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.media-delete-btn {
+  font-size: 0.8rem;
+  background: #f24645;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 4px 8px;
+  cursor: pointer;
+}

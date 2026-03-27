@@ -1,0 +1,34 @@
+.media-upload-zone {
+  margin-bottom: 20px;
+}
+
+.media-upload-drop {
+  border: 2px dashed #aaa;
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+  background: #f9f9f9;
+  cursor: pointer;
+  position: relative;
+}
+
+.media-upload-drop input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.media-upload-drop.drag-over {
+  border-color: #03d1ff;
+  background: #e8f8ff;
+}
+
+.media-upload-title {
+  font-weight: 600;
+}
+
+.media-upload-status {
+  margin-top: 8px;
+  font-size: 0.9rem;
+}

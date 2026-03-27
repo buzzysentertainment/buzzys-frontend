@@ -1,0 +1,171 @@
+/* --- 1. MASTER LAYOUT & SCROLLING --- */
+.admin-layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: #f0f2f5;
+}
+
+.admin-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100vh;
+}
+
+.admin-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 30px;
+  position: relative;
+  /* Soft sparkle-vibe gradient for the main workspace */
+  background: linear-gradient(135deg, #e0f7fa 0%, #ffffff 50%, #fff9c4 100%);
+  scroll-behavior: smooth;
+}
+
+/* --- 2. SIDEBAR: THE TROPICAL GRADIENT COMMAND CENTER --- */
+.admin-sidebar {
+  width: 260px;
+  /* Seamless flow: Aqua -> Mint -> Yellow */
+  background: linear-gradient(180deg, 
+    #B2EBF2 0%,   /* Soft Aqua Blue */
+    #C6EC97 50%,  /* Buzzy Mint Green */
+    #FFE082 100%  /* Deeper Buzzy Yellow */
+  );
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 25px 15px;
+  flex-shrink: 0;
+  box-shadow: 4px 0 25px rgba(0, 0, 0, 0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.sidebar-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.logo-icon {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 4px 8px rgba(249, 215, 28, 0.3));
+  margin-bottom: 10px;
+}
+
+.admin-sidebar h2 {
+  color: #2c3e50; /* Deep charcoal for contrast on the Aqua top */
+  font-size: 1.4rem;
+  font-weight: 900;
+  margin: 0;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* --- 3. BUTTONS: GLASSY INACTIVE STATE --- */
+.admin-sidebar .nav-item-flair {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 14px 20px;
+  /* Glassmorphism: semi-transparent white to let the gradient peek through */
+  background: rgba(255, 255, 255, 0.35) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  border-radius: 20px;
+  color: #444 !important;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-align: left;
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.admin-sidebar .nav-item-flair:hover {
+  background: rgba(255, 255, 255, 0.6) !important;
+  color: #1a1a1a !important;
+  transform: translateX(6px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* --- 4. THE RAINBOW ACTIVE STATES (Solid & Popping) --- */
+.nav-item-flair.active {
+  border: none !important;
+  transform: scale(1.05) translateX(8px);
+  font-weight: 800;
+  backdrop-filter: none; 
+}
+
+/* Bookings: Soft Pastel Yellow */
+body .admin-sidebar .nav-item-flair.active.bookings-active {
+  background: linear-gradient(135deg, #FFF9C4 0%, #F9E79F 100%) !important;
+  color: #5D4037 !important;
+  box-shadow: 0 10px 20px rgba(255, 249, 196, 0.4) !important;
+}
+
+/* Calendar: Sky Blue */
+body .admin-sidebar .nav-item-flair.active.calendar-active {
+  background: linear-gradient(135deg, #E1F5FE 0%, #B3E5FC 100%) !important;
+  color: #01579B !important;
+  box-shadow: 0 10px 20px rgba(179, 229, 252, 0.4) !important;
+}
+
+/* Inventory: Soft Pink */
+body .admin-sidebar .nav-item-flair.active.inventory-active {
+  background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD0 100%) !important;
+  color: #880E4F !important;
+  box-shadow: 0 10px 20px rgba(248, 187, 208, 0.4) !important;
+}
+
+/* Settings: Lavender */
+body .admin-sidebar .nav-item-flair.active.settings-active {
+  background: linear-gradient(135deg, #F3E5F5 0%, #E1BEEF 100%) !important;
+  color: #4A148C !important;
+  box-shadow: 0 10px 20px rgba(225, 190, 239, 0.4) !important;
+}
+
+/* --- 5. DETAILS & ANIMATIONS --- */
+.nav-icon {
+  font-size: 1.3rem;
+  transition: transform 0.3s ease;
+}
+
+.nav-item-flair.active .nav-icon {
+  animation: gentle-bounce 2s infinite ease-in-out;
+}
+
+@keyframes gentle-bounce {
+  0%, 100% { transform: translateY(0) scale(1.2); }
+  50% { transform: translateY(-4px) scale(1.2); }
+}
+
+/* --- 6. FOOTER & LOGOUT --- */
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.logout-btn {
+  background: rgba(255, 82, 82, 0.15) !important;
+  color: #C62828 !important;
+  border: 1px solid rgba(255, 82, 82, 0.3) !important;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 82, 82, 0.25) !important;
+  color: #b71c1c !important;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(211, 47, 47, 0.1);
+}

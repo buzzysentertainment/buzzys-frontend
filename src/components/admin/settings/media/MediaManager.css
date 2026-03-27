@@ -1,0 +1,20 @@
+.media-manager {
+  padding: 20px;
+}
+
+.media-section {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 2px solid #ddd;
+}
+
+.media-section-header {
+  margin-bottom: 10px;
+}
+
+.media-section-subtitle {
+  font-size: 0.9rem;
+  color: #666;
+}

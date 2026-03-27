@@ -1,0 +1,273 @@
+/* ------------------------------------------------------ */
+/* --- CATALOG PAGE & TITLES (From Original Styles) --- */
+/* ------------------------------------------------------ */
+.catalog-page {
+  background: linear-gradient(to bottom, var(--buzzy-blue), var(--buzzy-aqua));
+  min-height: 100vh;
+  opacity: 0;
+  animation: fadeInBG 1.2s ease forwards;
+  padding-top: 140px; /* Adjusted for your new fixed header */
+}
+
+.buzzy-title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: var(--buzzy-gradient);
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--buzzy-black);
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+/* ------------------------------------------------------ */
+/* --- FILTER BAR (Now White) --- */
+/* ------------------------------------------------------ */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px 0 30px;
+}
+
+.filter-btn {
+  /* CHANGED: From Blue to White */
+  background: var(--buzzy-white); 
+  color: var(--buzzy-black);
+  font-weight: 900; 
+  font-size: 1rem;
+  padding: 10px 22px; 
+  border-radius: 40px; 
+  border: 4px solid var(--buzzy-black);
+  box-shadow: 0 4px 0px var(--buzzy-black); 
+  cursor: pointer;
+  transition: 0.2s ease; 
+  margin: 5px;
+}
+
+.filter-btn:hover {
+  transform: scale(1.05);
+  background: var(--buzzy-yellow-bold);
+}
+
+.filter-btn.active {
+  background: var(--buzzy-yellow-bold);
+  box-shadow: 0 4px 0px var(--buzzy-black);
+}
+
+/* ------------------------------------------------------ */
+/* --- INFLATABLE CARDS (Now White Buttons) --- */
+/* ------------------------------------------------------ */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.inflatable-card {
+  width: 240px;
+  padding: 16px;
+  border-radius: 30px;
+  background: var(--buzzy-white);
+  border: 5px solid var(--buzzy-black);
+  box-shadow: 12px 12px 0px var(--buzzy-yellow-bold);
+  text-align: center;
+  transition: 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.inflatable-card:hover {
+  transform: scale(1.03);
+}
+
+.inflatable-card button,
+.btn-book {
+  /* CHANGED: From Blue to White */
+  background: var(--buzzy-white) !important;
+  color: var(--buzzy-black);
+  font-weight: 900;
+  font-size: 1.1rem;
+  padding: 12px 25px;
+  border-radius: 50px;
+  border: 4px solid var(--buzzy-black);
+  box-shadow: 0 6px 0px var(--buzzy-black);
+  cursor: pointer;
+  transition: 0.2s ease;
+  margin-top: 10px;
+}
+
+.inflatable-card button:hover,
+.btn-book:hover {
+  transform: scale(1.05);
+  background: var(--buzzy-yellow-bold) !important;
+}
+
+/* ------------------------------------------------------ */
+/* --- IMAGES & ANIMATIONS --- */
+/* ------------------------------------------------------ */
+.inflatable-img {
+  width: 100%;
+  max-height: 160px;
+  object-fit: contain;
+  margin-bottom: 10px;
+  border-radius: 12px;
+}
+
+@keyframes fadeInBG {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+/* --- CATEGORY TITLES (Browse All Bounce Houses, etc.) --- */
+.catalog-header-text, 
+.filter-section h2 {
+  font-size: 2.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 20px;
+  
+  /* Apply the Buzzy Brand Gradient */
+  background: var(--buzzy-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  /* Add the Bold Black Outline to make it readable on the blue/aqua background */
+  -webkit-text-stroke: 1.5px var(--buzzy-black);
+  
+  /* Slight shadow to make it lift off the page */
+  filter: drop-shadow(4px 4px 0px rgba(0,0,0,0.1));
+  
+  letter-spacing: 1px;
+}
+
+/* Mobile adjustment so it doesn't wrap weirdly */
+@media (max-width: 600px) {
+  .catalog-header-text, 
+  .filter-section h2 {
+    font-size: 1.8rem;
+    -webkit-text-stroke: 1px var(--buzzy-black);
+  }
+}
+/* 1. THE COLORFUL TITLE TEXT */
+.catalog-page h2, 
+.buzzy-title {
+  font-size: 3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 40px 0 20px;
+  
+  /* Apply the Buzzy Gradient from your :root */
+  background: var(--buzzy-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  /* Add the Bold Black Outline to make it pop off the blue background */
+  -webkit-text-stroke: 1.5px var(--buzzy-black);
+  filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.1));
+}
+
+/* 2. THE WHITE FILTER BUTTONS */
+.filter-btn {
+  /* Changed from blue/transparent to White */
+  background: var(--buzzy-white) !important; 
+  color: var(--buzzy-black) !important;
+  font-weight: 900;
+  font-size: 1.1rem;
+  padding: 12px 24px;
+  border: 4px solid var(--buzzy-black);
+  border-radius: 50px;
+  /* 3D "Cubby" Shadow */
+  box-shadow: 4px 4px 0px var(--buzzy-black);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+/* Hover & Active states */
+.filter-btn:hover, 
+.filter-btn.active {
+  background: var(--buzzy-yellow-bold) !important;
+  transform: translateY(-3px);
+  box-shadow: 6px 6px 0px var(--buzzy-black);
+}
+/* --- THE TITLE BUBBLE CUBICLE --- */
+.catalog-header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px auto;
+  max-width: 90%;
+  width: fit-content; /* Shrinks the bubble to fit the text */
+  
+  /* The "Cubicle" Box Style */
+  background: var(--buzzy-white);
+  border: 5px solid var(--buzzy-black);
+  border-radius: 40px;
+  padding: 20px 40px;
+  box-shadow: 12px 12px 0px var(--buzzy-yellow-bold); /* Signature yellow shadow */
+  
+  text-align: center;
+}
+
+/* THE COLORFUL TEXT INSIDE THE BUBBLE */
+.catalog-header-container h2 {
+  margin: 0;
+  font-size: 2.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  
+  /* Buzzy Gradient Fill */
+  background: var(--buzzy-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  /* Bold Outline */
+  -webkit-text-stroke: 1.5px var(--buzzy-black);
+}
+
+/* Sub-text or "Our Full Inventory" styling */
+.catalog-header-container p {
+  margin: 5px 0 0;
+  color: var(--buzzy-black);
+  font-weight: 900;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+/* Mobile fix for the bubble */
+@media (max-width: 768px) {
+  .catalog-header-container {
+    padding: 15px 25px;
+    max-width: 95%;
+  }
+  .catalog-header-container h2 {
+    font-size: 1.8rem;
+  }
+}
+.continue-shopping-btn {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 10px 16px;
+  background: #fff7d1;
+  border: 2px solid #f4c542;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #333;
+  text-decoration: none;
+}
+
+.continue-shopping-btn:hover {
+  background: #ffe89a;
+}

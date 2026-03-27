@@ -1,0 +1,46 @@
+/* --- BUZZY CHAT BUBBLE --- */
+.buzzy-chat-bubble {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 70px;
+  height: 70px;
+  background: #ffd84d;
+  border: 5px solid #000;
+  border-radius: 50%;
+  box-shadow: 0 6px 0px #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 9999;
+  transition: transform 0.2s ease;
+  animation: buzzyPop 0.6s ease-out;
+}
+
+.buzzy-chat-bubble:hover {
+  transform: scale(1.1) rotate(-3deg);
+  background: #ffea00;
+}
+
+.buzzy-chat-icon {
+  width: 45px;
+  height: auto;
+  pointer-events: none;
+  font-size: 2rem;
+  animation: buzzyWiggle 1.5s infinite ease-in-out;
+}
+
+/* Pop-in animation */
+@keyframes buzzyPop {
+  0% { transform: scale(0); }
+  70% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* Cute wiggle animation */
+@keyframes buzzyWiggle {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(8deg); }
+  100% { transform: rotate(0deg); }
+}

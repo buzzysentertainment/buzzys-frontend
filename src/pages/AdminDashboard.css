@@ -1,0 +1,113 @@
+/* 1. SCROLLING & LAYOUT FIXES */
+.admin-section-scroll {
+  overflow-y: auto !important;
+  height: calc(100vh - 100px); 
+  padding: 20px;
+  scroll-behavior: smooth;
+  /* Matches the soft background vibe of the sidebar */
+  background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%); 
+}
+
+/* 2. HEADER & BRANDING */
+.admin-header-sleek-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 0 10px;
+}
+
+.main-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #1a202c; /* Slate for better readability */
+  margin: 0;
+}
+
+.brand-underline-small {
+  width: 50px;
+  height: 5px;
+  /* Matches the Yellow 'Active' highlight in your sidebar */
+  background: #FDF2B3; 
+  border-radius: 10px;
+  margin-top: 8px;
+}
+
+/* Download/Master Button - Switched to Action Blue */
+.master-pdf-btn {
+  background: #00D1FF; 
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 15px; /* Matches sidebar pill shape */
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 209, 255, 0.2);
+}
+
+.master-pdf-btn:hover:not(:disabled) {
+  background: #00b8e6;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 209, 255, 0.4);
+}
+
+/* 3. PREMIUM TABLE & GLASS STYLES */
+.table-card-glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(15px);
+  border-radius: 30px; /* Matched to sidebar button rounding */
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+}
+
+.admin-table td {
+  background: white;
+  padding: 20px;
+  font-size: 0.95rem;
+  color: #4a5568;
+  /* Soft borders instead of harsh lines */
+  border-top: 1px solid #f7fafc; 
+  border-bottom: 1px solid #f7fafc;
+}
+
+/* Row Hover - Uses the Sidebar Yellow */
+.admin-table tr:hover td {
+  background: #fffef0; /* Very light tint of your sidebar yellow */
+  transform: translateY(-1px);
+}
+
+/* View Button in Table - Matched to Screenshot */
+.view-btn {
+  background-color: #00D1FF;
+  color: white;
+  border-radius: 10px;
+  font-weight: 700;
+  border: none;
+  padding: 6px 16px;
+}
+
+/* 4. STATUS BADGES - Matched to your Screenshot */
+.status-badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+/* Confirmed Badge from Screenshot 161950 */
+.status-Confirmed { 
+  background: #C6F6D5; 
+  color: #22543d; 
+}
+
+.status-Active { 
+  background: #EBF8FF; 
+  color: #2b6cb0; 
+}
+
+.status-Pending { 
+  background: #FEFCBF; 
+  color: #744210; 
+}

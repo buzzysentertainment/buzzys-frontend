@@ -1,0 +1,15 @@
+.mock-display {
+  width: 100%;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: all 0.25s ease;
+}
+
+.mock-hero {
+  transition: all 0.25s ease;
+}
+
+.mock-card {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.25s ease;
+}

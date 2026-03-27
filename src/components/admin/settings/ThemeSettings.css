@@ -1,0 +1,39 @@
+.theme-settings-container {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.theme-settings {
+  flex: 1;
+}
+
+.theme-preview-panel {
+  flex: 1;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.theme-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.theme-field label {
+  font-weight: bold;
+}
+
+.success-text {
+  margin-top: 10px;
+  color: green;
+  font-weight: bold;
+}

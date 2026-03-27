@@ -1,36 +1,63 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react"; // Added useEffect
-import { db } from "./firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import BookingSuccess from "./pages/BookingSuccess";
+import ScrollToTop from "./components/ScrollToTop";
+
+import BuzzyChatBubble from "./components/BuzzyBot/BuzzyChatBubble";
+import BuzzyChatWindow from "./components/BuzzyBot/BuzzyChatWindow";
+
 import Home from "./pages/Home";
 import Catalog from "./pages/Catalog";
-import Cart from "./pages/Cart";
+import Contact from "./pages/Contact";
+import BookNow from "./pages/BookNow";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import BookingModal from "./components/BookingModal";
+import Cart from "./pages/Cart";
+import Availability from "./components/Availability"; // Import the new component
+
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
+import RequireAdmin from "./components/RequireAdmin";
+
+import FAQ from "./pages/FAQ";
+import SafetyRules from "./pages/SafetyRules";
+import About from "./pages/About";
+
 import "./styles.css";
 
-
 function App() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
-  // 1. Initialize cart from LocalStorage if it exists
+  // Load cart and selected date from localStorage
   const [cart, setCart] = useState(() => {
     const savedCart = localStorage.getItem("buzzy_hive_cart");
     return savedCart ? JSON.parse(savedCart) : [];
   });
 
-  // 2. Save to LocalStorage whenever the cart changes
+  const [bookingDate, setBookingDate] = useState(() => {
+    return localStorage.getItem("buzzy_selected_date") || "";
+  });
+
   useEffect(() => {
     localStorage.setItem("buzzy_hive_cart", JSON.stringify(cart));
-  }, [cart]);
+    localStorage.setItem("buzzy_selected_date", bookingDate);
+  }, [cart, bookingDate]);
 
-  const openBooking = () => setIsModalOpen(true);
-  const closeBooking = () => setIsModalOpen(false);
-
-  const addToCart = (item) => {
+  // UPDATED: Now accepts an optional date from the Availability component
+  const addToCart = (item, date = null) => {
+    if (date) {
+      // Format date to YYYY-MM-DD for backend compatibility
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const dateString = `${year}-${month}-${day}`;
+      
+      setBookingDate(dateString);
+    }
+    
     setCart([...cart, item]);
-	setIsModalOpen(true);
+    navigate("/cart"); // Take them to cart so they see the item added
   };
 
   const removeFromCart = (index) => {
@@ -40,53 +67,76 @@ function App() {
 
   const clearCart = () => {
     setCart([]);
-    localStorage.removeItem("buzzy_hive_cart"); // Clean up storage
+    setBookingDate("");
+    localStorage.removeItem("buzzy_hive_cart");
+    localStorage.removeItem("buzzy_selected_date");
   };
-   // ⭐ 3. Firestore connection test — THIS is where it goes
-  useEffect(() => {
-    async function testConnection() {
-      try {
-        const snapshot = await getDocs(collection(db, "test"));
-        console.log("Firestore connected! Docs:", snapshot.docs.length);
-      } catch (error) {
-        console.error("Firestore error:", error);
-      }
-    }
-    testConnection();
-  }, []);
-
 
   return (
+    <>
+      <Header
+        onBook={() => navigate("/book")}
+        onCartOpen={() => navigate("/cart")}
+        cartCount={cart.length}
+      />
+
+      <Routes>
+        <Route path="/" element={<Home addToCart={addToCart} />} />
+        <Route path="/catalog" element={<Catalog addToCart={addToCart} />} />
+        
+	    <Route path="/about" element={<About />} />
+		
+        {/* NEW: Availability Route */}
+        <Route path="/availability" element={<Availability addToCart={addToCart} />} />
+
+        <Route
+          path="/cart"
+          element={
+            <Cart
+              cart={cart}
+              bookingDate={bookingDate} // Pass the date to the Cart page
+              removeFromCart={removeFromCart}
+              clearCart={clearCart}
+            />
+          }
+        />
+
+        <Route path="/book" element={<BookNow />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/safety-rules" element={<SafetyRules />} />
+
+		<Route path="/booking-success" element={<BookingSuccess />} />
+		
+        {/* ADMIN ROUTES */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin" element={<Navigate to="/admin/dashboard" />} />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <RequireAdmin>
+              <AdminDashboard />
+            </RequireAdmin>
+          }
+        />
+      </Routes>
+
+      <Footer />
+
+      <BuzzyChatBubble onClick={() => setIsChatOpen(true)} />
+      {isChatOpen && (
+        <BuzzyChatWindow onClose={() => setIsChatOpen(false)} />
+      )}
+    </>
+  );
+}
+
+export default function AppWithRouter() {
+  return (
     <Router>
-      <div className="App">
-        <Header onBook={openBooking} cartCount={cart.length} />
-
-        <Routes>
-          <Route path="/" element={<Home openBooking={openBooking} />} />
-          <Route path="/catalog" element={<Catalog addToCart={addToCart} />} />
-          <Route 
-            path="/view_cart" 
-            element={
-              <Cart 
-                cart={cart} 
-                removeFromCart={removeFromCart} 
-                clearCart={clearCart} 
-              />
-            } 
-          />
-        </Routes>
-
-        <Footer />
-
-        {isModalOpen && (
-          <BookingModal 
-            onClose={closeBooking} 
-            cart={cart} 
-            clearCart={clearCart} 
-          />
-        )}
-      </div>
+      {/* This component watches the URL and resets the scroll to the top */}
+      <ScrollToTop />
+      <App />
     </Router>
   );
 }
-export default App;

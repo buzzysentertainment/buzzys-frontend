@@ -1,0 +1,27 @@
+/* Make this section the top floor */
+.review-grid-section {
+  width: 100vw !important;
+  background: #fffbe6;
+  padding: 60px 0;
+  text-align: center;
+  border-bottom: 4px solid #000; /* Separator line */
+}
+
+.review-grid {
+  display: flex;
+  flex-direction: row; /* Reviews sit in a line */
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap; /* Allows them to stack on mobile */
+  width: 90%;
+  margin: 0 auto;
+}
+
+.review-card {
+  background: #ffffff;
+  border: 4px solid #000;
+  border-radius: 30px;
+  padding: 24px;
+  width: 320px;
+  box-shadow: 8px 8px 0px #ffd84d; /* Buzzy 3D shadow */
+}

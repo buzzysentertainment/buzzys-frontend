@@ -1,0 +1,265 @@
+/* --- 1. THE OVERLAY: GLASS EFFECT --- */
+.admin-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(30, 39, 46, 0.4); 
+  backdrop-filter: blur(4px); 
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- 2. THE MODAL BOX: RESIZABLE & FLEXIBLE --- */
+.admin-modal {
+  background: #ffffff;
+  border-radius: 16px; 
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e1e8ed;
+  
+  /* Agency & Size Logic */
+  resize: both;
+  overflow: hidden; 
+  min-width: 480px;
+  min-height: 550px;
+  width: 600px; /* Starting width */
+  max-height: 90vh;
+}
+
+/* --- 3. THE HEADER: DRAG-READY --- */
+.admin-modal-header {
+  padding: 18px 24px;
+  background: #fcfcfd;
+  border-bottom: 1px solid #e1e8ed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-modal-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a202c;
+}
+
+/* --- 4. THE CONTENT: TWO-COLUMN GRID --- */
+.admin-modal-content {
+  padding: 24px;
+  overflow-y: auto;
+  flex-grow: 1; /* Allows content to expand with modal resize */
+  color: #4a5568;
+}
+
+/* Details Grid: Automatically snaps to 2 columns if room allows */
+.modal-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.modal-info-group label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #a0aec0;
+  margin-bottom: 4px;
+}
+
+.modal-info-group p {
+  margin: 0;
+  color: #2d3748;
+  font-weight: 500;
+}
+
+/* Itemized Box (Floating Card Feel) */
+.modal-items-box {
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: 12px;
+  margin: 24px 0;
+  border: 1px dashed #cbd5e0;
+}
+
+/* Pricing Highlight */
+.modal-pricing-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px;
+  padding: 15px;
+  background: #f0fdfa; /* Very faint teal */
+  border-radius: 10px;
+}
+
+.modal-pricing-row span {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #006064;
+  margin-left: 10px;
+}
+
+/* --- 5. ADMIN WORKSPACE: DISTINGUISHABLE --- */
+.admin-zone {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.admin-modal-select, 
+.admin-modal-textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  margin-top: 8px;
+  font-family: inherit;
+  transition: border 0.2s;
+}
+
+.admin-modal-textarea {
+  min-height: 120px;
+  background-color: #fffdfa; /* Subtle warmth for notes */
+}
+
+.admin-modal-select:focus, 
+.admin-modal-textarea:focus {
+  border-color: #80deea;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(128, 222, 234, 0.2);
+}
+
+/* --- 6. BUTTONS --- */
+.modal-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  margin-top: 12px;
+  transition: transform 0.1s, background 0.2s;
+}
+
+.modal-btn-save {
+  background: #B2EBF2;
+  color: #006064;
+}
+
+.modal-btn-save:hover {
+  background: #80deea;
+  transform: translateY(-1px);
+}
+
+.modal-btn-close {
+  background: #edf2f7;
+  color: #4a5568;
+}
+
+.modal-btn-close:hover {
+  background: #e2e8f0;
+}
+.admin-modal {
+  position: absolute; 
+  width: 80%;           /* Scaled screen width */
+  max-width: 1000px;    /* Prevents it from getting too large on big screens */
+  height: 85vh;         /* Stretches vertically like a sub-page */
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #e1e8ed;
+  z-index: 3001;
+}
+
+.modal-logo-img {
+  height: 40px;
+  width: auto;
+  margin-right: 12px;
+}
+
+.header-brand-group {
+  display: flex;
+  align-items: center;
+}
+
+.header-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #a0aec0;
+}
+
+.admin-modal-content {
+  padding: 40px; /* More padding for that "full page" feel */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.admin-modal {
+  position: fixed; /* Changed to fixed so it stays in the viewport */
+  
+  /* Initial centering */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  
+  width: 80%;
+  max-width: 1000px;
+  height: 85vh;
+  background: white;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.25);
+  border: 1px solid #e1e8ed;
+  overflow: hidden;
+  z-index: 3001;
+
+  /* The "Pop" Animation */
+  animation: modalPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPop {
+  from { 
+    opacity: 0; 
+    transform: translate(-50%, -45%) scale(0.95); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translate(-50%, -50%) scale(1); 
+  }
+}
+.admin-page-wrapper {
+  width: 100%;
+  height: 100%;
+  background: #f5f5f5;
+  overflow-y: auto;
+  padding: 30px;
+}
+
+.admin-page-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.admin-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: default; /* no dragging */
+}

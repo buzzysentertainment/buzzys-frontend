@@ -1,0 +1,123 @@
+/* HERO WRAPPER */
+.hero-section {
+  width: 100%;
+  display: flex;
+  max-width: 1400px;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+/* WHITE WRAPPER AROUND TITLE + SLIDESHOW */
+.hero-wrapper {
+  background: #fff;
+  border: 5px solid var(--buzzy-black);
+  border-radius: 40px;
+  padding: 30px;
+  max-width: 1400px;   /* balanced width */
+  width: 95%;
+  max-width: 1400px;
+  box-shadow: 15px 15px 0px var(--buzzy-yellow-bold);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;  /* allows bee to float */
+  margin: 0 auto 40px auto;
+}
+
+/* TITLE INSIDE WRAPPER */
+.hero-title {
+  margin-top: 0;
+  font-size: 3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 20px;
+  background: var(--buzzy-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 2px var(--buzzy-black);
+}
+
+/* SLIDESHOW CONTAINER — centered under title */
+.slideshow-container {
+  position: relative;
+  width: 100%; 
+  max-width: 800px;      
+  aspect-ratio: 21 / 9;   
+  background: #000;       /* Changed to black to hide any gaps during transitions */
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 0;
+
+}
+/* SLIDESHOW IMAGE */
+.slideshow-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* ... keep your existing Hero Wrapper, Title, and Container styles ... */
+
+/* NAVIGATION BUTTONS — Large & Centered on Sides */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); /* Perfectly centers vertically */
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent frosted look */
+  backdrop-filter: blur(8px);           /* blurs the video/image behind button */
+  color: #000;
+  border: 3px solid #000;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 100;                        /* Sits above the video */
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Positioning */
+.prev-btn {
+  left: 20px;
+}
+
+.next-btn {
+  right: 20px;
+}
+
+/* HOVER EFFECTS — Matches your "Buzzy" theme */
+.nav-btn:hover {
+  background: #00d1ff; /* Buzzy Blue */
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 0 15px rgba(0, 209, 255, 0.6);
+}
+
+.nav-btn:active {
+  transform: translateY(-50%) scale(0.9);
+}
+
+/* Remove the old tiny buttons if they are still appearing in the HTML */
+.slide-btn {
+  display: none !important;
+}
+/* FLOATING BEE LEFT SIDE */
+.hero-bee {
+  position: absolute;
+  left: 10px; 
+  top: 20px;
+  width: 110px;
+  height: auto;
+  animation: floatBee 4s ease-in-out infinite;
+}
+
+@keyframes floatBee {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0px); }
+}

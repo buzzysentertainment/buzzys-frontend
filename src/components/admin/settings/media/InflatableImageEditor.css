@@ -1,0 +1,38 @@
+.inflatable-editor {
+  margin-top: 10px;
+}
+
+.inflatable-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.inflatable-card-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.inflatable-preview img {
+  width: 100%;
+  max-height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #ddd;
+}
+
+.inflatable-placeholder {
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.inflatable-save-row {
+  margin-top: 20px;
+  text-align: right;
+}

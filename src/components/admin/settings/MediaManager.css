@@ -1,0 +1,127 @@
+.media-manager {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Section Wrapper */
+.media-section {
+  background: #ffffff;
+  border: 2px solid #e2e2e2;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Section Header */
+.media-section-header {
+  margin-bottom: 16px;
+}
+
+.media-section-header h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.media-section-subtitle {
+  margin-top: 4px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Buttons (shared admin style) */
+.admin-btn {
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.admin-btn-primary {
+  background: #03d1ff;
+  color: #fff;
+}
+
+.admin-btn-primary:hover {
+  background: #00b8e0;
+}
+
+/* Utility spacing */
+.media-manager h2 {
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+.media-manager {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding: 10px;
+}
+
+.media-manager h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+/* Media Section Containers */
+.media-section {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #eef0f2;
+  padding: 24px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.media-section-header {
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #00d2ff; /* Your Neon Blue */
+  padding-left: 16px;
+}
+
+.media-section-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #2d3436;
+}
+
+.media-section-subtitle {
+  margin: 4px 0 0 0;
+  font-size: 0.9rem;
+  color: #636e72;
+}
+
+/* Utility Loading State */
+.loading-text {
+  text-align: center;
+  padding: 40px;
+  color: #00d2ff;
+  font-weight: 600;
+}
+
+/* Shared Editor Button Styling */
+.media-section button {
+  transition: all 0.2s ease;
+}
+
+.media-section button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Specific styling for the Media Library section at the bottom */
+.media-section:last-child {
+  background: #fdfdfd;
+  border-style: dashed;
+}
+
+/* Spacing for the upload zone at the top */
+.media-manager > .media-upload-zone {
+  margin-bottom: 1rem;
+}

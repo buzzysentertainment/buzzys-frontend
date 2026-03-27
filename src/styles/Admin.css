@@ -1,0 +1,700 @@
+
+/* ===========================
+   ADMIN LAYOUT
+=========================== */
+
+.admin-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  height: 100vh;
+  background: #f5f6fa;
+  overflow: hidden;
+}
+
+/* ===========================
+   SIDEBAR
+=========================== */
+
+.admin-sidebar {
+  background: #1f1f1f;
+  color: white;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.admin-sidebar h2 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.admin-sidebar a {
+  color: #dcdcdc;
+  text-decoration: none;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  transition: 0.2s;
+  font-size: 1rem;
+}
+
+.admin-sidebar a:hover {
+  background: #333;
+  color: white;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+.admin-header {
+  background: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.admin-header-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.admin-header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* ===========================
+   MAIN CONTENT
+=========================== */
+
+.admin-content {
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* ===========================
+   TABLE
+=========================== */
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.admin-table th {
+  background: #fafafa;
+  padding: 1rem;
+  text-align: left;
+  font-weight: bold;
+  border-bottom: 1px solid #eee;
+}
+
+.admin-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.admin-table tr:hover {
+  background: #f9f9f9;
+}
+
+/* ===========================
+   STATUS BADGES
+=========================== */
+
+.status-badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.status-pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-confirmed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-completed {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.status-cancelled {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* ===========================
+   FILTER BAR
+=========================== */
+
+.admin-filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-filters input,
+.admin-filters select {
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+
+.admin-btn {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.admin-btn-primary {
+  background: #ffb703;
+  color: black;
+}
+
+.admin-btn-primary:hover {
+  background: #ffa600;
+}
+
+.admin-btn-danger {
+  background: #dc3545;
+  color: white;
+}
+
+.admin-btn-danger:hover {
+  background: #c82333;
+}
+
+/* ===========================
+   MODALS
+=========================== */
+
+.admin-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 450px;
+  max-width: 90%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.admin-modal h3 {
+  margin-bottom: 1rem;
+}
+
+.admin-modal textarea {
+  width: 100%;
+  height: 120px;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: none;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 900px) {
+  .admin-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-sidebar {
+    display: none;
+  }
+}
+/* Full-page wrapper */
+.admin-login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    135deg,
+    #fff7d1 0%,
+    #ffeaa7 40%,
+    #fff 100%
+  );
+  padding: 20px;
+}
+
+/* Login card */
+.admin-login-card {
+  background: #ffffff;
+  padding: 40px 32px;
+  border-radius: 18px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  border: 3px solid #f4c542;
+  animation: floatUp 0.5s ease-out;
+}
+
+/* Title */
+.admin-login-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 800;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+/* Subtitle */
+.admin-login-subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+/* Form */
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Labels */
+.admin-login-form label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+}
+
+/* Inputs */
+.admin-login-form input {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 2px solid #ddd;
+  font-size: 15px;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-login-form input:focus {
+  border-color: #f4c542;
+  box-shadow: 0 0 6px rgba(244, 197, 66, 0.6);
+  outline: none;
+}
+
+/* Error */
+.admin-error {
+  color: #d9534f;
+  font-size: 14px;
+  margin-top: -4px;
+}
+
+/* Login button */
+.admin-login-btn {
+  margin-top: 10px;
+  padding: 12px;
+  background: #f4c542;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.admin-login-btn:hover {
+  background: #ffcf3f;
+}
+
+.admin-login-btn:active {
+  transform: scale(0.97);
+}
+.settings-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 600px;
+}
+
+.settings-section {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #000;
+}
+
+.settings-section h3 {
+  margin-bottom: 15px;
+}
+
+.settings-section label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.settings-section input {
+  padding: 10px;
+  border: 2px solid #000;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+.settings-row {
+  display: flex;
+  gap: 20px;
+}
+
+.admin-btn {
+  padding: 12px 20px;
+  background: #ffd84d;
+  border: 2px solid #000;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Animation */
+@keyframes floatUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.bookings-scroll {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+.admin-section-scroll {
+  max-height: calc(100vh - 80px); /* adjust if your header is taller */
+  overflow-y: auto;
+  padding: 1rem;
+  scroll-behavior: smooth;
+}
+
+/* Optional: Buzzy’s branded scrollbar */
+.admin-section-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.admin-section-scroll::-webkit-scrollbar-thumb {
+  background-color: #f4b400; /* Buzzy yellow */
+  border-radius: 4px;
+}
+/* ===========================
+   DRAGGABLE MODAL SUPPORT
+=========================== */
+
+.draggable-modal {
+  position: absolute;        /* allows dragging */
+  width: 450px;
+  max-width: 90%;
+  max-height: 80vh;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  overflow: hidden;          /* content scrolls inside */
+}
+
+/* Drag handle (header area) */
+.drag-handle {
+  padding: 12px 16px;
+  cursor: grab;
+  background: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+  user-select: none;         /* prevents text selection while dragging */
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+/* Scrollable modal content */
+.admin-modal-content {
+  padding: 1rem;
+  overflow-y: auto;
+  max-height: calc(80vh - 60px); /* subtract header height */
+}
+.admin-login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 20px;
+}
+
+.admin-login-glass-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 50px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.brand-text {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.brand-text span {
+  color: #f9d71c; /* Buzzy Yellow */
+  font-weight: 800;
+}
+
+.brand-underline {
+  width: 50px;
+  height: 4px;
+  background: #f9d71c;
+  margin: 0 auto 30px;
+  border-radius: 2px;
+}
+
+.admin-form-sleek label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.admin-form-sleek input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  transition: border-color 0.3s ease;
+}
+
+.admin-form-sleek input:focus {
+  border-color: #f9d71c;
+  outline: none;
+}
+
+.login-button-modern {
+  width: 100%;
+  padding: 16px;
+  background: #333;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-button-modern:hover {
+  background: #000;
+}
+
+.error-text-modern {
+  color: #ff4d4d;
+  font-size: 0.85rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.forgot-pass-minimal {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.8rem;
+  color: #888;
+  text-decoration: none;
+}
+/* 1. The Moving Gradient Background */
+.admin-login-container.sparkle-bg {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Blue to Green to Yellow palette */
+  background: linear-gradient(-45deg, #00d2ff, #3a7bd5, #00f2fe, #f9d71c);
+  background-size: 400% 400%;
+  animation: gradientFlow 10s ease infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 2. The Sparkle Effect */
+.sparkle-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(circle, #fff 1px, transparent 1px),
+    radial-gradient(circle, #fff 1.5px, transparent 1.5px);
+  background-size: 40px 40px, 90px 90px;
+  background-position: 0 0, 20px 20px;
+  opacity: 0.4;
+  animation: shimmer 15s linear infinite;
+}
+
+@keyframes shimmer {
+  from { transform: translateY(0); }
+  to { transform: translateY(-1000px); }
+}
+
+/* 3. Glassmorphism Card (Ensures readability) */
+.admin-login-glass-card {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 45px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+  z-index: 5;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* 4. Button Flair */
+.login-button-modern {
+  background: #222;
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.login-button-modern:hover {
+  background: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+/* Sidebar & Layout */
+.admin-main-layout {
+  display: flex;
+  min-height: 100vh;
+  z-index: 10;
+  position: relative;
+  gap: 20px;
+  padding: 20px;
+}
+
+.admin-sidebar-glass {
+  width: 260px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* Glass Cards */
+.filters-glass-card, .table-glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 25px;
+  margin-bottom: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+}
+
+/* Sleek Table */
+.buzzy-admin-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px; /* Space between rows */
+}
+
+.buzzy-admin-table th {
+  padding: 15px;
+  text-align: left;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.buzzy-admin-table td {
+  padding: 20px 15px;
+  background: #fff;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Round the corners of the rows */
+.buzzy-admin-table td:first-child { border-left: 1px solid #f0f0f0; border-radius: 12px 0 0 12px; }
+.buzzy-admin-table td:last-child { border-right: 1px solid #f0f0f0; border-radius: 0 12px 12px 0; }
+
+/* Status Badges */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+.status-badge.active { background: #e6f9f0; color: #10b981; }
+
+/* Action Button */
+.admin-view-btn {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-view-btn:hover {
+  background: #f9d71c;
+  color: #333;
+  transform: translateY(-2px);
+}

@@ -1,0 +1,148 @@
+/* ----------- Main Footer Container ----------- */
+.footer {
+  background: #b4ffc8; /* Light green background from your screenshots */
+  padding: 60px 0 20px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column; /* Stacks Reviews (Top Floor) over Info (Bottom Floor) */
+  align-items: center;
+}
+
+/* ----------- TOP FLOOR: REVIEW CUBBIES ----------- */
+.footer-reviews-container {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 60px; /* Large gap to prevent overlapping links */
+}
+
+.google-review-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.google-logo {
+  width: 60px; /* Large enough to see but won't overlap other text */
+  height: auto;
+}
+
+.google-stars {
+  font-size: 1.5rem;
+  color: #fbbc04;
+}
+
+.google-review-grid {
+  display: flex;
+  flex-direction: row; /* Horizontal cubbies straight across */
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap; /* Allows them to stack on mobile */
+  padding: 0 20px;
+}
+
+.google-review-item {
+  background: #ffffff;
+  border: 4px solid #000000; /* Bold black "cubby" border */
+  border-radius: 25px;
+  padding: 24px;
+  width: 300px;
+  box-shadow: 8px 8px 0px #ffd84d; /* Yellow 3D shadow like the calendar */
+  text-align: left;
+  transition: transform 0.2s ease;
+}
+
+.google-review-item:hover {
+  transform: translateY(-5px);
+}
+
+.google-cta-button {
+  display: inline-block;
+  margin-top: 25px;
+  font-weight: 800;
+  color: #4285F4;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ----------- BOTTOM FLOOR: HORIZONTAL INFO ROW ----------- */
+.footer-brand-info-row {
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 95%;
+  max-width: 1200px;
+  border-top: 3px solid rgba(0,0,0,0.1); /* Separator line */
+  padding-top: 40px;
+  margin: 0 auto;
+}
+
+/* Column 1: Brand */
+.footer-brand {
+  flex: 1;
+}
+
+.footer-brand h3 {
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-bottom: 5px;
+}
+
+.footer-brand span {
+  color: #000;
+}
+
+/* Column 2: Safety/FAQ Links */
+.footer-links {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center; /* Centers links in the middle column */
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+/* Column 3: Socials & Admin */
+.footer-socials-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Pushes socials/admin to the far right */
+  gap: 15px;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 15px;
+}
+
+.social-logo {
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  box-shadow: 0 4px 0px #ffd84d; /* Matching 3D style on icons */
+}
+
+.footer-admin-link {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #000;
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+/* ----------- Copyright Bar ----------- */
+.footer-bottom {
+  margin-top: 50px;
+  text-align: center;
+  font-weight: 700;
+  width: 100%;
+}

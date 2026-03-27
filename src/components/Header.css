@@ -1,0 +1,178 @@
+/* ------------------------------------------------------ */
+/* --- HEADER COMPONENT STYLES --- */
+/* ------------------------------------------------------ */
+
+.header {
+  background-color: var(--buzzy-white);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  border-bottom: 5px solid var(--buzzy-black);
+  padding: 10px 0; /* Reduced padding for a tighter look */
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* CRITICAL: Fixes discombobulation by allowing wrapping */
+  gap: 15px;
+}
+
+/* --- BRANDING / LOGO --- */
+.logo-wrapper {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 320px;
+}
+
+.logo {
+  font-size: 2.2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0;
+  background: var(--buzzy-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.logo-tagline {
+  color: var(--buzzy-black);
+  font-weight: 900; /* Bold Black per client request */
+  font-size: 0.95rem;
+  margin: 2px 0 5px 0;
+  letter-spacing: 0.3px;
+}
+
+.phone-link {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+  background: linear-gradient(90deg, #4FC3F7, #AB47BC, #FF7043, #FFEB3B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-top: -5px;
+}
+
+/* --- NAVIGATION CUBBIES --- */
+.nav-links {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap; /* Allows buttons to stack on mobile */
+}
+
+.nav-item {
+  padding: 10px 20px;
+  border: 3px solid #FFD84D; /* Buzzy yellow cubby */
+  border-radius: 50px;
+  font-weight: 800;
+  color: var(--buzzy-black);
+  background: var(--buzzy-white);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  white-space: nowrap; /* Prevents text breaking inside cubby */
+  box-shadow: 0 4px 0px #FFD84D;
+}
+
+.nav-item:hover {
+  background: #FFD84D;
+  transform: scale(1.05);
+}
+
+.nav-item.active {
+  background: #FFD84D;
+  border-color: #FFB800;
+  box-shadow: 0 2px 0px #000;
+  transform: translateY(2px);
+}
+
+/* --- BOOK NOW / CART BUTTON --- */
+.book-now-btn {
+  background: var(--buzzy-white);
+  border: 4px solid var(--buzzy-black);
+  padding: 10px 20px;
+  border-radius: 40px;
+  font-weight: 900;
+  font-size: 1rem;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 4px 0px var(--buzzy-black);
+  transition: 0.2s ease;
+  white-space: nowrap;
+}
+
+.book-now-btn:hover {
+  transform: scale(1.05);
+  background: var(--buzzy-blue);
+}
+
+.cart-badge {
+  background: var(--buzzy-red);
+  color: var(--buzzy-white);
+  font-size: 0.75rem;
+  font-weight: 900;
+  padding: 2px 7px;
+  border-radius: 50%;
+  position: absolute;
+  top: -10px;
+  right: -8px;
+  border: 2px solid var(--buzzy-black);
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 950px) {
+  .header-container {
+    justify-content: center;
+    padding: 15px;
+  }
+  
+  .nav-links {
+    justify-content: center;
+    margin-top: 5px;
+  }
+}
+@media (max-width: 768px) {
+  .nav-links {
+    display: grid;
+    /* This creates two equal columns */
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+    justify-items: center;
+  }
+
+  .nav-item {
+    width: 100%;
+    text-align: center;
+    padding: 10px 5px; /* Slightly tighter padding for mobile */
+    font-size: 0.9rem;  /* Shrunk slightly to prevent text overflow */
+  }
+
+  /* Make "Book Now" span across both columns at the bottom */
+  li:last-child {
+    grid-column: span 2;
+    width: 100%;
+  }
+
+  .book-now-btn {
+    width: 100%;
+    margin-top: 5px;
+  }
+}

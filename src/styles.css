@@ -1,251 +1,439 @@
-/* --- GLOBAL --- */
-body {
-  margin: 0;
-  background-color: #fffdf5 !important;
-  padding-top: 100px !important; /* Fixed: Prevents header from covering content */
-  font-family: sans-serif;
+/* ------------------------------------------------------ */
+/* --- BUZZY BRAND VARIABLES (CANVA PALETTE) --- */
+/* ------------------------------------------------------ */
+:root {
+  --buzzy-blue: #03d1ff;
+  --buzzy-purple: #9b8eed;
+  --buzzy-pink: #f59d9b;
+  --buzzy-yellow: #fdeb15;
+  --buzzy-gold: #fdd34e;
+  --buzzy-red: #f24645;
+  --buzzy-orange: #ffbb66;
+  --buzzy-orange-soft: #f9cd88;
+  --buzzy-green-light: #c6ec97;
+  --buzzy-green-mid: #d1ed94;
+  --buzzy-mint: #a6e8a6;
+  --buzzy-teal: #78d8c5;
+  --buzzy-aqua: #6dd9c4;
+  --buzzy-cyan: #00e5fe;
+  --buzzy-magenta: #ee8bb8;
+  --buzzy-yellow-bold: #fcd74c;
+  --buzzy-black: #000000;
+  --buzzy-white: #ffffff;
+
+  --buzzy-gradient: linear-gradient(
+    to right,
+    var(--buzzy-blue),
+    var(--buzzy-purple),
+    var(--buzzy-orange),
+    var(--buzzy-yellow)
+  );
 }
 
-/* --- HEADER (FIXED & BOLD) --- */
+/* ------------------------------------------------------ */
+/* --- GLOBAL --- */
+/* ------------------------------------------------------ */
+body {
+  margin: 0;
+  background-color: transparent;
+  background-size: 200px;
+  padding-top: 100px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ------------------------------------------------------ */
+/* --- HEADER --- */
+/* ------------------------------------------------------ */
 .header {
-  background-color: #fff3c4 !important;
-  position: fixed !important;
+  background-color: var(--buzzy-white);
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100% !important;
-  z-index: 9999 !important;
-  border-bottom: 5px solid #000 !important;
-  padding: 15px 0 !important;
-  display: flex !important; /* Added to align container */
-  align-items: center !important;
+  width: 100%;
+  z-index: 9999;
+  border-bottom: 5px solid var(--buzzy-black);
+  padding: 15px 0;
 }
 
 .header-container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 40px;
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: var(--buzzy-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .nav-links {
-  display: flex !important;
-  flex-direction: row !important; /* Fixed: Stops links from stacking vertically */
-  gap: 20px !important;
-  list-style: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.nav-item, .cart-btn {
-  text-decoration: none !important;
-  color: #000 !important;
-  font-weight: 800 !important;
-  white-space: nowrap !important;
+.nav-item {
+  padding: 10px 20px;
+  border: 3px solid #FFD84D;
+  border-radius: 50px;
+  font-weight: 600;
+  color: #333;
+  background: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
-/* --- BUBBLY TITLE STYLING --- */
+
+.nav-item:hover {
+  background: #FFD84D;
+  color: #000;
+  transform: scale(1.05);
+}
+
+.nav-item.active {
+  background: #FFD84D;
+  color: #000;
+  border-color: #FFB800;
+  box-shadow: 0 0 10px rgba(255, 216, 77, 0.6);
+}
+
+/* ------------------------------------------------------ */
+/* --- BUTTONS --- */
+/* ------------------------------------------------------ */
+.btn-book-now,
+.btn-book {
+  background: var(--buzzy-blue) !important;
+  color: var(--buzzy-black);
+  font-weight: 900;
+  font-size: 1rem;
+  padding: 10px 22px;
+  border-radius: 40px;
+  border: 4px solid var(--buzzy-black);
+  box-shadow: 0 4px 0px var(--buzzy-black);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-book-now:hover,
+.btn-book:hover {
+  transform: scale(1.05);
+  background: linear-gradient(
+    to right,
+    var(--buzzy-purple),
+    var(--buzzy-orange),
+    var(--buzzy-yellow),
+    var(--buzzy-blue)
+  );
+}
+
+.btn-book:active {
+  box-shadow: 0 2px 0px var(--buzzy-black);
+  transform: translateY(4px);
+}
+
+/* Cart button */
+.cart-btn {
+  background: var(--buzzy-white);
+  border: 4px solid var(--buzzy-black);
+  padding: 10px 18px;
+  border-radius: 40px;
+  font-weight: 900;
+  font-size: 1rem;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 4px 0px var(--buzzy-black);
+  transition: 0.2s ease;
+}
+
+.cart-btn:hover { transform: scale(1.05); }
+
+.cart-count {
+  background: var(--buzzy-red);
+  color: var(--buzzy-white);
+  font-size: 0.8rem;
+  font-weight: 900;
+  padding: 2px 7px;
+  border-radius: 50%;
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  border: 2px solid var(--buzzy-black);
+}
+
+/* ------------------------------------------------------ */
+/* --- TITLES --- */
+/* ------------------------------------------------------ */
 .buzzy-title {
-	font-size: 3.5rem !important;
-	font-weight: 900 !important;
-	color: #000 !important;
-	text-transform: uppercase;
-	letter-spacing: 1px;
-	text-shadow:
-	  3px 3px 0px #ffb300, 
-	  6px 6px 0px rgba(0,0,0,0.1);
-	-webkit-text-stroke: 1px #000 ;
-	display: inline-block;
-	transition: transform 0.3s ease;
-}
-.buzzy-title:hover {
-  transform: scale(1.05) rotate(-1deg);
-  color: #ffb300 !important;
-  text-shadow: 3px 3px 0px #000;
+  font-size: 3.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  background: var(--buzzy-gradient);
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--buzzy-black);
+  transition: transform 0.3s ease;
 }
 
-	  
-	
-/* --- BUZZY TOP SECTION --- */
-.buzzy-section {
-  background: #fff8d9;
-  padding: 3rem 1.5rem;
-  margin: 2rem auto;
-  border-radius: 30px;
-  max-width: 1200px; /* Fixed: Added missing value that caused the crash */
-  border: 4px solid #000;
-  
-  
-/* BUBBLY TEXT STYLES */
+.buzzy-title:hover { transform: scale(1.05) rotate(-1deg); }
+
+.subtitle {
   text-align: center;
-  color: #4a3728;
-  font-weight:800;
-  line-height: 1.4;
-  letter-spacing: 0.5px;
-  letter-spacing: 0.5px;
-  text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(0,0,0,0.05);
-}
-.buzzy-section h2, .buzzy-section h3 {
-	font-size: 2.5rem;
-	text-transform: uppercase;
-	color: #ffb300;
-	-webkit-text-stroke: 1.5px #000;
-	filter: drop-shadow(3px 3px 0px #000);
-}
-/* --- HOME PAGE SHIELD --- */
-.home-page {
-  display: block !important;
-  text-align: center !important;
+  font-size: 2.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  background: var(--buzzy-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 2px var(--buzzy-black);
+  animation: gradientShift 6s ease-in-out infinite;
 }
 
-/* --- CART PAGE SHIELD --- */
+/* ------------------------------------------------------ */
+/* --- INFLATABLE CARDS --- */
+/* ------------------------------------------------------ */
+.inflatable-card {
+  width: 320px;
+  padding: 28px;
+  border-radius: 30px;
+  background: var(--buzzy-white);
+  border: 5px solid var(--buzzy-black);
+  box-shadow: 12px 12px 0px var(--buzzy-yellow-bold);
+  text-align: center;
+  transition: 0.2s ease;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.inflatable-card:hover { transform: scale(1.03); }
+
+.inflatable-img {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.card-image-container {
+  width: 100%;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------ */
+/* --- FAVORITES SECTION --- */
+/* ------------------------------------------------------ */
+.favorites-nook {
+  width: 100%;
+  padding: 60px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.favorites-wrapper {
+  width: 95%;
+  max-width: 1350px;
+  margin: 0 auto;
+  background: var(--buzzy-white);
+  border: 5px solid var(--buzzy-black);
+  border-radius: 40px;
+  padding: 40px;
+  box-shadow: 15px 15px 0px var(--buzzy-yellow-bold);
+}
+
+.favorites-title {
+  text-align: center;
+  font-size: 2.6rem;
+  font-weight: 900;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  background: var(--buzzy-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 2px var(--buzzy-black);
+}
+
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px;
+  justify-items: center;
+}
+
+.favorites-grid .inflatable-card {
+  width: 280px;
+  padding: 20px;
+  transform: scale(1.03);
+  transition: transform 0.25s ease;
+}
+
+.favorites-grid .inflatable-card:hover { transform: scale(1.08); }
+
+.favorites-button {
+  text-align: center;
+  margin-top: 40px;
+}
+/* Target the "View Full Inventory" button and the cards' buttons */
+.btn-book,
+.inflatable-card button,
+.dry-wet-toggle button,
+.add-to-cart-btn {
+  background-color: #00d1ff !important; /* The bright blue/cyan */
+  color: #000 !important;               /* Black text */
+  border: 2px solid #000 !important;    /* Solid black border */
+  border-bottom: 4px solid #000 !important; /* The 3D "Shadow" effect */
+  border-radius: 20px;                  /* Rounded bubble shape */
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+/* Hover effect to make them pop when touched */
+.btn-book:hover,
+.inflatable-card button:hover {
+  background-color: #00b8e6 !important; /* Slightly darker blue */
+  transform: translateY(-2px);           /* Lift effect */
+}
+/* ------------------------------------------------------ */
+/* --- CART PAGE --- */
+/* ------------------------------------------------------ */
 .cart-page-wrapper {
   max-width: 1400px;
   margin: 0 auto;
   padding: 40px;
 }
-
-/* This is the 50/50 split for the cart */
-.cart-split-grid {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  gap: 60px !important;
-  text-align: left !important;
+.wave-bees-floating {
+  display: flex;              /* line them up side by side */
+  justify-content: center;    /* center them horizontally */
+  gap: 20px;                  /* space between bees */
+  margin-top: 40px;           /* breathing room above */
 }
 
-/* ITEM CARDS */
-.cart-items-list {
-  background: white !important;
-  padding: 30px !important;
-  border-radius: 40px !important;
-  border: 5px solid #000 !important;
-  box-shadow: 10px 10px 0px #ffd84d !important;
-}
-.cart-item-image {
-  width: 120px;
+.floating-bee {
+  width: 60px;                /* small but not tiny */
   height: auto;
-  border-radius: 12px;
-  border: 4px solid #000;
-  margin-bottom: 10px;
-  display: block;
+  animation: buzzFloat 4s ease-in-out infinite;
 }
 
-/* INFLATABLE CARDS (RESTORED GRID) */
-.inflatable-card img {
-  width: 100%;
-  max-width: 220px;
-  height: auto;
-  border-radius: 12px;
-  object-fit: cover;
-  display: block;
-  margin: 0 auto;
+/* Gentle floating animation */
+@keyframes buzzFloat {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-6px); }
+  100% { transform: translateY(0px); }
 }
 
-.inflatable-card {
-  width: 250px;
-  padding: 20px;
-  border-radius: 16px;
-  background: white;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  text-align: center;
-  border: 1px solid #eee; /* Light border to define shape */
+/* ------------------------------------------------------ */
+/* --- MOBILE ADJUSTMENTS --- */
+/* ------------------------------------------------------ */
+
+/* 1. Ensure the viewport behaves */
+@viewport {
+  width: device-width;
+  zoom: 1.0;
 }
-.inflatable-card button, .btn-book {
-  background-color: #ffd84d !important; /* Bright Yellow */
-  color: #000 !important;
-  font-family: 'Inter', sans-serif;
-  font-weight: 900 !important;
-  font-size: 1.1rem !important;
-  text-transform: uppercase;
+
+@media (max-width: 768px) {
+  /* Adjust Global Padding so content doesn't touch screen edges */
+  body {
+    padding-top: 80px; /* Smaller header space */
+  }
+
+  /* 2. Header & Navigation */
+  .header-container {
+    padding: 0 15px;
+    flex-direction: column; /* Stack logo and nav if it gets too tight */
+    gap: 10px;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+  }
+
+  .nav-links {
+    gap: 8px;
+    flex-wrap: wrap; /* Allows buttons to wrap to a second line */
+    justify-content: center;
+  }
+
+  .nav-item {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    border-width: 2px;
+  }
+
+  /* 3. Titles - Shrink them so they don't overflow */
+  .buzzy-title, .subtitle, .favorites-title {
+    font-size: 1.8rem !important;
+    -webkit-text-stroke: 1px var(--buzzy-black); /* Thinner stroke for small screens */
+    padding: 0 10px;
+  }
+
+  /* 4. Inflatable Cards - Make them flexible */
+  .inflatable-card {
+    width: 90% !important; /* Switch from 320px to fluid width */
+    max-width: 350px;
+    margin: 10px auto;
+    min-height: auto;
+    box-shadow: 8px 8px 0px var(--buzzy-yellow-bold); /* Smaller shadow */
+  }
+
+  /* 5. Favorites Grid - Switch from 3 columns to 1 column */
+  .favorites-grid {
+    grid-template-columns: 1fr; /* Stack cards vertically */
+    gap: 20px;
+  }
+
+  .favorites-wrapper {
+    padding: 20px 10px;
+    width: 98%;
+    border-radius: 20px;
+  }
+
+  /* 6. Fix Images */
+  .inflatable-img, .card-image-container {
+    height: 180px;
+  }
+
+  /* 7. Cart & Buttons */
+  .cart-page-wrapper {
+    padding: 15px;
+  }
   
-  /* The "Bubble" Shape */
-  padding: 12px 25px !important;
-  border-radius: 50px !important; /* Makes it a pill shape */
-  border: 4px solid #000 !important; /* Thick cartoon outline */
+  .btn-book-now, .btn-book, .cart-btn {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+}
+
+/* ------------------------------------------------------ */
+/* --- TABLET ADJUSTMENTS --- */
+/* ------------------------------------------------------ */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .favorites-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for iPads */
+  }
   
-  /* 3D Depth Shadow */
-  box-shadow: 0 6px 0px #000 !important;
-  
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: inline-block;
-  margin-top: 10px;
+  .buzzy-title {
+    font-size: 2.5rem;
+  }
 }
-
-/* "Press" Effect when clicking */
-.inflatable-card button:active, .btn-book:active {
-  box-shadow: 0 2px 0px #000 !important;
-  transform: translateY(4px);
-}
-
-/* "Inflate" effect on hover */
-.inflatable-card button:hover, .btn-book:hover {
-  background-color: #ffea00 !important;
-  transform: scale(1.05);
-}
-/* This ensures home page cards stay horizontal */
-.card-container, .pricing-container {
-  display: flex !important;
-  flex-direction: row !important; 
-  flex-wrap: wrap !important;
-  justify-content: center !important;
-  gap: 30px !important;
-  padding: 40px !important;
-}
-
-/* FORM BOXES */
-.checkout-form-container {
-  background: white !important;
-  padding: 30px !important;
-  border-radius: 40px !important;
-  border: 5px solid #000 !important;
-}
-
-.booking-form input, 
-.booking-form select, 
-.booking-form textarea {
-  width: 100% !important;
-  padding: 20px !important;
-  font-size: 1.2rem !important;
-  font-weight: 800 !important;
-  border: 4px solid #000 !important;
-  border-radius: 20px !important;
-  box-sizing: border-box !important;
-  margin-bottom: 20px !important;
-}
-
-.btn-confirm {
-  width: 100% !important;
-  background-color: #ffd84d !important;
-  padding: 25px !important;
-  font-size: 1.8rem !important;
-  font-weight: 900 !important;
-  border: 4px solid #000 !important;
-  border-radius: 40px !important;
-  cursor: pointer;
-}
-/* --- CLEANER, SMALLER FORM FIELDS FOR CART PAGE --- */
-.checkout-form-container .booking-form input,
-.checkout-form-container .booking-form select,
-.checkout-form-container .booking-form textarea {
-  padding: 10px 14px !important;     /* smaller padding */
-  font-size: 1rem !important;        /* smaller text */
-  font-weight: 700 !important;       /* still bold, but less chunky */
-  border-radius: 12px !important;    /* smaller bubble */
-  margin-bottom: 14px !important;    /* tighter spacing */
-}
-
-/* Make textarea less tall */
-.checkout-form-container .booking-form textarea {
-  min-height: 80px !important;
-}
-
-/* Smaller, cleaner confirm button */
-.checkout-form-container .btn-confirm {
-  padding: 14px !important;
-  font-size: 1.2rem !important;
-  border-radius: 20px !important;
-}
-
-@media

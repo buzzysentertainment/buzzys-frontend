@@ -1,0 +1,375 @@
+/* Main Layout Container */
+.admin-settings-layout {
+  display: grid;
+  grid-template-columns: 450px 1fr; /* Fixed sidebar, flexible preview */
+  height: 100vh;
+  background-color: #f8f9fa;
+  overflow: hidden; /* Prevents the whole page from scrolling */
+}
+
+/* --- LEFT SIDEBAR: CONTROLS --- */
+.settings-sidebar {
+  background: #ffffff;
+  border-right: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto; /* Only the sidebar scrolls */
+  padding: 24px;
+}
+
+.sidebar-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.sidebar-header p {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 24px;
+}
+/* Typography and Input Focus */
+.theme-field input:focus, 
+.theme-field select:focus {
+  outline: none;
+  border-color: #00d2ff; /* Match your Neon Blue */
+  box-shadow: 0 0 0 2px rgba(0, 210, 255, 0.1);
+}
+
+/* Custom Field Text Inputs */
+.theme-field input[type="text"],
+.theme-field select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: border-color 0.2s;
+}
+
+/* range slider thumb styling for a cleaner look */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #00d2ff;
+  cursor: pointer;
+  margin-top: -6px; 
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  background: #eee;
+  border-radius: 2px;
+}
+
+/* Tabs Navigation */
+.settings-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 16px;
+}
+
+.settings-tabs button {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.settings-tabs button.active {
+  background: #00d2ff; /* Your Neon Blue */
+  color: white;
+  border-color: #00d2ff;
+}
+
+/* Footer & Publish Button */
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 24px;
+  border-top: 1px solid #eee;
+  text-align: center;
+}
+
+.publish-btn {
+  width: 100%;
+  padding: 14px;
+  background: #28a745; /* Success Green */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.publish-btn:disabled {
+  background: #ccc;
+}
+
+/* --- RIGHT SIDE: PREVIEW PANE --- */
+.preview-pane {
+  background: #e9ecef;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  overflow-y: auto;
+}
+
+.preview-header {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.device-toggles button {
+  padding: 6px 12px;
+  margin-right: 5px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background: #fff;
+}
+
+.device-toggles button.active {
+  background: #333;
+  color: #fff;
+}
+
+.live-status {
+  font-weight: bold;
+  color: #d9534f;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Viewport Frames */
+.viewport-frame {
+  background: white;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.viewport-frame.desktop {
+  width: 100%;
+  max-width: 1000px;
+  height: 800px;
+}
+
+.viewport-frame.mobile {
+  width: 375px;
+  height: 667px;
+}
+
+/* --- MOCKUP CONTENT STYLING --- */
+.preview-mockup {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.preview-announcement {
+  text-align: center;
+  padding: 8px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.preview-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 25px;
+  border-bottom: 1px solid #eee;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.preview-hero {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.preview-hero h1 { margin-bottom: 10px; }
+
+.preview-card-sample {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  width: 200px;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.card-img {
+  height: 120px;
+  width: 100%;
+  border-radius: 4px;
+}
+/* --- THEME TAB SPECIFIC CONTROLS --- */
+
+.settings-tab-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Tool Grid for Colors/Ranges */
+.theme-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.theme-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.theme-field.full-width {
+  grid-column: span 2;
+}
+
+.theme-field label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #444;
+}
+
+/* Preset Scheme Grid */
+.preset-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.preset-chip {
+  padding: 10px;
+  background: #fdfdfd;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.preset-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+/* Custom Fields Header */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.add-field-btn {
+  background: #e7f3ff;
+  color: #007bff;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Dynamic Rows */
+.input-group {
+  display: flex;
+  gap: 8px;
+}
+
+.input-group input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.remove-field-btn {
+  background: #ffe5e5;
+  color: #d9534f;
+  border: none;
+  width: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.divider {
+  border: 0;
+  border-top: 1px solid #f0f0f0;
+  margin: 20px 0;
+}
+
+/* Color Inputs */
+input[type="color"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 38px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: none;
+  cursor: pointer;
+}
+
+/* Range Sliders */
+input[type="range"] {
+  width: 100%;
+  cursor: pointer;
+}
+/* The frame that contains the homepage preview */
+.viewport-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* keeps the frame clean */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* The actual scrollable area */
+.preview-real-homepage {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;        /* enables scrolling */
+  overflow-x: hidden;
+  background: white;
+  border-radius: 12px;
+  scrollbar-width: thin;     /* Firefox */
+}
+
+/* Optional: nicer scrollbars for Chrome */
+.preview-real-homepage::-webkit-scrollbar {
+  width: 6px;
+}
+
+.preview-real-homepage::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
