@@ -51,6 +51,14 @@ export default function BookingsTable({ bookings, onUpdated }) {
                 b.items && b.items.length > 0
                   ? b.items.map((i) => i.title || i.name).join(", ")
                   : b.item || "—";
+              const itemModes = (b.items || [])
+                .map((item) => String(item.mode || "").toLowerCase())
+                .filter((mode) => mode === "wet" || mode === "dry");
+              const setupType = itemModes.length
+                ? new Set(itemModes).size > 1 ? "mixed" : itemModes[0]
+                : String(b.setupType || b.mode || "dry").toLowerCase();
+              const setupLabel =
+                setupType === "mixed" ? "WET + DRY" : setupType.toUpperCase();
 
               // 🎯 Extracts the string format "dry" or "wet" straight from Firebase
               const itemModes = (b.items || [])
