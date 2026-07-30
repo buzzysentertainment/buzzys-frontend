@@ -7,8 +7,8 @@
  * See a full list of supported triggers at https://firebase.google.com/docs/functions
  */
 
-const {setGlobalOptions} = require("firebase-functions");
-const functions = require("firebase-functions");
+const {setGlobalOptions} = require("firebase-functions/v2");
+const {onSchedule} = require("firebase-functions/v2/scheduler");
 const axios = require("axios");
 
 // For cost control, you can set the maximum number of containers that can be
@@ -31,10 +31,12 @@ setGlobalOptions({maxInstances: 10});
 //   response.send("Hello from Firebase!");
 // });
 // DAILY AUTOPAY SCHEDULER
-exports.dailyAutopay = functions.pubsub
-    .schedule("every day 07:00")
-    .timeZone("America/Chicago")
-    .onRun(async () => {
+exports.dailyAutopay = onSchedule(
+    {
+      schedule: "every day 07:00",
+      timeZone: "America/Chicago",
+    },
+    async () => {
       try {
         await axios.get("https://buzzys-backend.onrender.com/book/run-autopay");
         console.log("Autopay triggered successfully");
@@ -42,4 +44,5 @@ exports.dailyAutopay = functions.pubsub
         console.error("Autopay failed:", err);
         throw err;
       }
-    });
+    },
+);
