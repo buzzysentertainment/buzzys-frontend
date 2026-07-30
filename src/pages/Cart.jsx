@@ -192,16 +192,6 @@ export default function Cart({ cart, bookingDate, removeFromCart, clearCart }) {
         ...item,
         price: parseFloat(item.price.toString().replace(/[^0-9.]/g, ""))
       }));
-      const selectedModes = [...new Set(
-        finalCart
-          .map((item) => item.mode)
-          .filter((mode) => mode === "wet" || mode === "dry")
-      )];
-      const setupType =
-        selectedModes.length === 1
-          ? selectedModes[0]
-          : selectedModes.length > 1 ? "mixed" : "dry";
-
       const selectedSetupTypes = [
         ...new Set(
           finalCart
@@ -325,15 +315,6 @@ export default function Cart({ cart, bookingDate, removeFromCart, clearCart }) {
                   <input type="text" required value={formData.state} onChange={(e) => setFormData({...formData, state: e.target.value})} />
                 </div>
                 <div className="bubble-input-group" style={{ flex: '0.4' }}>
-                  <label>State *</label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.state}
-                    onChange={(e) => setFormData({...formData, state: e.target.value})}
-                  />
-                </div>
-                <div className="bubble-input-group" style={{ flex: '0.4' }}>
                   <label>Zip *</label>
                   <input type="text" required value={formData.zip} onChange={(e) => setFormData({...formData, zip: e.target.value})} />
                 </div>
@@ -346,20 +327,6 @@ export default function Cart({ cart, bookingDate, removeFromCart, clearCart }) {
 				<p className="confirm-helper-text">
 				  We confirm your address to calculate delivery distance and ensure accurate pricing.
 				</p>
-              </div>
-
-              <div className="bubble-input-group">
-                <button
-                  type="button"
-                  className="bubble-btn yellow"
-                  onClick={handleConfirmAddress}
-                  disabled={isCalculatingMileage}
-                >
-                  {isCalculatingMileage ? "Calculating mileage..." : "Confirm Address & Mileage"}
-                </button>
-                {distance !== null && (
-                  <small>{distance} miles — ${mileageFee.toFixed(2)} mileage fee</small>
-                )}
               </div>
 
               <div className="bubble-input-group">
