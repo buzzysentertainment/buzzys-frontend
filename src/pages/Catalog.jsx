@@ -1,9 +1,15 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InflatableCard from "../components/InflatableCard";
 import { PRICES } from "../data/prices";
 import "./Catalog.css";
 
 export default function Catalog({ addToCart }) {
+
+  // Set footer color for this page
+  useEffect(() => {
+    document.documentElement.style.setProperty("--footer-color", "var(--buzzy-aqua)");
+  }, []);
+
   const inventory = [
     {
       id: "volcano19",
@@ -14,7 +20,7 @@ export default function Catalog({ addToCart }) {
       category: "Slides",
       description: "Feel the heat with our massive 19ft Volcano Slide! Features a steep drop and a splash landing."
     },
-	{
+    {
       id: "dolphin16",
       title: "16' Dolphin Slide",
       dry: PRICES.dolphin16.dry,
@@ -23,7 +29,6 @@ export default function Catalog({ addToCart }) {
       category: "Slides",
       description: "Make a splash with our 16ft Dolphin Slide! Perfect for kids and families, with a fun aquatic theme."
     },
-
     {
       id: "rainbowRush18",
       title: "18' Rainbow Rush Slide",
@@ -112,25 +117,25 @@ export default function Catalog({ addToCart }) {
       wet: null,
       filename: "foamblaster1.png",
       category: "Foam Parties",
-      description: "Professional-grade foam cannon! Safe, non-toxic, and biodegradable foam."
+      description: "Turn your party into a foamy wonderland! Includes 1 hour of nonstop foam fun. An additional hour is available for an extra cost because the machine requires more foam solution, generator time, and operator support to keep the party going strong.",
+	  hourOptions: [ 
+	    { label: "1 Hour (Included)", hours: 1, extraCost: 0 },
+		{ label: "Add 1 Extra Hour (+$100)", hours: 2, extraCost: 100 }
+	  ]
+		
     },
     {
       id: "snoCone",
       title: "Snow Cone Machine",
-      dry: 75,
+      dry: 50,
       wet: null,
       filename: "snocone.png",
       category: "Concessions",
-      description: "Keep cool with refreshing shaved ice! Includes syrup and cups."
-    },
-    {
-      id: "birthdayPackage",
-      title: "The Buzzy Birthday Package",
-      dry: 450,
-      wet: null,
-      filename: "BirthdayBundle.png",
-      category: "Packages",
-      description: "The Ultimate Hive Celebration! Includes: 1 Inflatable, 1 Sno Cone Machine, and more."
+      description: "Keep cool with refreshing shaved ice! Includes syrup and cups. Extra syrup is available for $30 and provides 25 servings!",
+	  servingsOptions: [
+		{ label: "Standard (Included)", servings: 0, extraCost: 0 },
+		{ label: "Extra 25 Servings (+$30)", servings: 25, extraCost: PRICES.snowCone.extraSyrup }
+	  ]
     }
   ];
 
@@ -143,7 +148,6 @@ export default function Catalog({ addToCart }) {
     "Foam Parties",
     "Soft Play",
     "Concessions",
-    "Packages",
   ];
 
   const [activeCategory, setActiveCategory] = useState("All");
@@ -151,6 +155,7 @@ export default function Catalog({ addToCart }) {
   return (
     <div className="catalog-page">
       <section className="inflatables" style={{ padding: "60px 20px" }}>
+        
         <div className="catalog-header-container">
           <h2>Our Full Inventory</h2>
           <p>Built for Kids. Inspired by Family.</p>
@@ -191,6 +196,7 @@ export default function Catalog({ addToCart }) {
               />
             ))}
         </div>
+
       </section>
     </div>
   );

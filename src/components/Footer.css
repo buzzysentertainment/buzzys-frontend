@@ -1,12 +1,18 @@
 /* ----------- Main Footer Container ----------- */
 .footer {
-  background: #b4ffc8; /* Light green background from your screenshots */
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--footer-color)
+  );
+
   padding: 60px 0 20px 0;
   width: 100%;
   display: flex;
-  flex-direction: column; /* Stacks Reviews (Top Floor) over Info (Bottom Floor) */
+  flex-direction: column;
   align-items: center;
 }
+
 
 /* ----------- TOP FLOOR: REVIEW CUBBIES ----------- */
 .footer-reviews-container {

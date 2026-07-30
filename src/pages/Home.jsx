@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import InflatableCard from '../components/InflatableCard';
 import { PRICES } from "../data/prices";
 import HeroSlideshow from "../components/HeroSlideshow";
+
 
 export default function Home({
   addToCart,
@@ -11,6 +12,32 @@ export default function Home({
   settings = {}
 }) {
   const navigate = useNavigate();
+
+  useEffect(() => {
+	const bee = document.querySelector(".free-bee");
+	if (!bee) return undefined;
+	let x = window.innerWidth * 0.3; 
+	let y = window.innerHeight * 0.3;
+	let animationFrameId;
+	
+	let vx = 1.2;  // horizontal speed
+	let vy = 1.0;  // vertical speed
+	
+	const fly = () => {
+	  vx += (Math.random() - 0.5) * 0.2;
+	  vy += (Math.random() - 0.5) * 0.2;
+	  x += vx;
+	  y += vy;
+	  if (x < 0 || x > window.innerWidth - 40) vx *= -1;
+	  if (y < 0 || y > window.innerHeight - 40) vy *= -1;
+	  bee.style.transform = `translate(${x}px, ${y}px)`;
+	  animationFrameId = requestAnimationFrame(fly);
+	};   
+	
+	fly();
+	return () => cancelAnimationFrame(animationFrameId);
+  }, []);	
+
 
   // -----------------------------
   // 1. HOMEPAGE SETTINGS (LIVE OR PREVIEW)
@@ -119,13 +146,14 @@ export default function Home({
             <p className="hero-subtitle">{heroSubtitle}</p>
           )}
 
-          {/* Button (only if enabled) */}
           {showHeroButton && (
-            <button className="btn-book" onClick={() => navigate('/catalog')}>
-              {heroButtonText}
-            </button>
-          )}
-
+			<div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', zIndex: 10, position: 'relative' }}>
+			  <button className="btn-book btn-hero-quote" onClick={() => navigate('/get-a-quote')}>
+			    Get a Quote Today!
+			  </button>
+			</div>
+		  )}
+		  
           {/* Slideshow OR custom hero image */}
           {heroImage ? (
             <img src={heroImage} alt="Hero" className="hero-custom-image" />
@@ -179,6 +207,9 @@ export default function Home({
         <img src="/images/buzzybuzzybee.png" alt="Buzzy" className="floating-bee" />
         <img src="/images/buzzybuzzybee.png" alt="Buzzy" className="floating-bee" />
       </div>
+	  <div className="free-bee">
+	    <img src="/images/buzzybuzzybee.png" alt="Flying Bee" />
+	  </div>	    
     </div>
   );
 }

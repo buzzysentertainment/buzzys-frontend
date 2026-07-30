@@ -1,7 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import CreateBookingModal from "./components/admin/CreateBookingModal";
 import BookingSuccess from "./pages/BookingSuccess";
 import ScrollToTop from "./components/ScrollToTop";
+import QuoteRequest from "./pages/QuoteRequest";
+import { PRICES } from "./data/prices";
 
 import BuzzyChatBubble from "./components/BuzzyBot/BuzzyChatBubble";
 import BuzzyChatWindow from "./components/BuzzyBot/BuzzyChatWindow";
@@ -86,7 +89,11 @@ function App() {
         
 	    <Route path="/about" element={<About />} />
 		
-        {/* NEW: Availability Route */}
+		<Route
+		  path="/get-a-quote"
+		  element={<QuoteRequest catalogItems={Object.values(PRICES)} />}
+		/>
+		
         <Route path="/availability" element={<Availability addToCart={addToCart} />} />
 
         <Route
@@ -119,6 +126,14 @@ function App() {
             </RequireAdmin>
           }
         />
+		<Route
+		  path="/admin/bookings/new"
+		  element={
+			<RequireAdmin>
+			  <CreateBookingModal />
+			</RequireAdmin>
+		  }
+		/>
       </Routes>
 
       <Footer />

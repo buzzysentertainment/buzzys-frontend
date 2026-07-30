@@ -1,8 +1,16 @@
+import React, { useEffect } from "react";
 import "./Contact.css";
 
 export default function Contact() {
+
+  // Set footer color for this page
+  useEffect(() => {
+    document.documentElement.style.setProperty("--footer-color", "var(--buzzy-purple)");
+  }, []);
+
   return (
     <div className="contact-page">
+
       {/* Hero Image */}
       <div className="contact-hero">
         <img
@@ -64,6 +72,7 @@ export default function Contact() {
 
       {/* Social Links */}
       <div className="social-links">
+
         {/* FACEBOOK */}
         <a
           href="https://www.facebook.com/buzzysentertainment/"
@@ -100,7 +109,7 @@ export default function Contact() {
           className="social-icon"
         >
           <img
-            src="/images/tiktoklogo.png" 
+            src="/images/tiktoklogo.png"
             alt="TikTok"
             className="social-logo"
           />
@@ -109,20 +118,15 @@ export default function Contact() {
 
       {/* Helpful Buttons */}
       <div className="contact-buttons">
-        <a
-          href="/faq"
-          className="contact-bubble-btn"
-        >
+        <a href="/faq" className="contact-bubble-btn">
           FAQs
         </a>
 
-        <a
-          href="/safety-rules"
-          className="contact-bubble-btn"
-        >
+        <a href="/safety-rules" className="contact-bubble-btn">
           Safety Rules
         </a>
       </div>
+
     </div>
   );
 }

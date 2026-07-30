@@ -21,9 +21,8 @@ API.interceptors.request.use((config) => {
 export function fetchAllBookings() {
   return API.get("/admin/bookings");
 }
-
-export function fetchBookingsByDate(date) {
-  return API.get(`/admin/bookings/date/${date}`);
+export function createBooking(data) {
+	return API.post("/admin/bookings", data);
 }
 
 export function updateBookingDetails(id, data) {
@@ -62,6 +61,16 @@ export function fetchBookingsByStatus(status) {
   return API.get(`/admin/bookings?status=${status}`);
 }
 
+export const sortBookingsNewestFirst = (bookings) => {
+	return [...bookings].sort((a, b) => {
+	  const dateA = new Date(a.createdAt || a.eventDate || a.date || 0);
+	  const dateB = new Date(b.createdAt || b.eventDate || b.date || 0);
+	  return dateB - dateA; // Newest (largest timestamp) first
+	});
+  };	
+  export function fetchBookingsByDate(date) {
+	return API.get(`/admin/bookings/date/${date}`);
+  }
 // -----------------------------
 // CALENDAR
 // -----------------------------
@@ -103,6 +112,15 @@ export const updateBookingRules = (data) =>
 export const getBusinessInfo = () => API.get("/admin/business-info");
 export const updateBusinessInfo = (data) =>
   API.post("/admin/business-info/update", data);
+
+// -----------------------------
+// PROMOTIONS SETTINGS
+// -----------------------------
+export const getPromotionsSettings = () => 
+  API.get("/admin/settings/promotions");
+
+export const updatePromotionsSettings = (data) =>
+  API.put("/admin/settings/promotions", data);
 
 // -----------------------------
 // MEDIA MANAGER

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AdminLayout from "../layouts/AdminLayout";
 import BookingsTable from "../components/admin/BookingsTable";
 import Filters from "../components/admin/Filters";
@@ -16,24 +17,28 @@ import {
   fetchBookingsByItem,
   fetchBookingsByStatus,
   startKeepAlive,
+  sortBookingsNewestFirst, // ⭐ Logic imported from your API util
 } from "../utils/adminApi";
 
 export default function AdminDashboard() {
+  const navigate = useNavigate();
   const [section, setSection] = useState("bookings");
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  
   // 1. Logic Intact: WAKE UP THE SERVER
   useEffect(() => {
     startKeepAlive();
   }, []);
 
-  // 2. Logic Intact: Fetch all bookings
+  // 2. Logic Updated: Fetch and SORT all bookings
   const loadBookings = async () => {
     setLoading(true);
     try {
       const res = await fetchAllBookings();
-      setBookings(res.data.bookings || []);
+      const data = res.data.bookings || [];
+      // ⭐ Apply sorting so the new in-person orders appear at the top immediately
+      setBookings(sortBookingsNewestFirst(data)); 
     } catch (err) {
       console.error("Error fetching bookings:", err);
     } finally {
@@ -47,7 +52,7 @@ export default function AdminDashboard() {
     }
   }, [section]);
 
-  // Logic Intact: Handle filter logic
+  // Logic Updated: Handle filter logic with sorting
   const handleFilter = async (filters) => {
     setLoading(true);
     try {
@@ -69,7 +74,8 @@ export default function AdminDashboard() {
           (b.customerName || b.name || "").toLowerCase().includes(s)
         );
       }
-      setBookings(filtered);
+      // ⭐ Ensure filtered results are also sorted newest-to-oldest
+      setBookings(sortBookingsNewestFirst(filtered));
     } catch (err) {
       console.error("Filter error:", err);
     } finally {
@@ -93,15 +99,23 @@ export default function AdminDashboard() {
                     <h2>Bookings</h2>
                     <div className="brand-underline-small"></div>
                   </div>
+                  
+                  <div className="header-action-btns" style={{ display: 'flex', gap: '10px' }}>
+                    <button
+                      className="create-booking-btn"
+					  onClick={() => navigate("/admin/bookings/new")}
+                    >
+                      + New Booking
+                    </button> 
 
-                  {/* MASTER PDF BUTTON: Connected to current filtered bookings */}
-                  <button 
-                    className="master-pdf-btn"
-                    onClick={() => downloadAllBookingsPDF(bookings)}
-                    disabled={loading || bookings.length === 0}
-                  >
-                    Download Delivery Pack ({bookings.length}) 📄
-                  </button>
+                    <button 
+                      className="master-pdf-btn"
+                      onClick={() => downloadAllBookingsPDF(bookings)}
+                      disabled={loading || bookings.length === 0}
+                    >
+                      Download Delivery Pack ({bookings.length}) 📄
+                    </button>
+                  </div>
                 </header>
                 
                 <Filters onFilter={handleFilter} />

@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Calendar from "react-calendar";
+import axios from "axios";
 import "react-calendar/dist/Calendar.css";
 import "./Availability.css";
 
-import { db } from "../firebase";
-import { collection, query, where, getDocs } from "firebase/firestore";
 import { PRODUCTS } from "../data/products";
 import { PRICES } from "../data/prices"; // <--- Added this back in
 
@@ -24,14 +23,19 @@ export default function Availability({ addToCart }) {
 
   useEffect(() => {
     const checkAvailability = async () => {
-      const q = query(
-        collection(db, "bookings"),
-        where("date", "==", firestoreDate),
-        where("status", "==", "active")
-      );
-
-      const snap = await getDocs(q);
-      setAvailability(snap.empty ? "available" : "unavailable");
+      try {
+        const response = await axios.post(
+          "https://buzzys-backend.onrender.com/book/check-availability",
+          {
+            date: firestoreDate,
+            items: PRODUCTS.map((item) => item.name),
+          }
+        );
+        setAvailability(response.data.available ? "available" : "unavailable");
+      } catch (error) {
+        console.error("Availability lookup failed:", error);
+        setAvailability(null);
+      }
     };
 
     checkAvailability();

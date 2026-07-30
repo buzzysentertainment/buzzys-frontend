@@ -116,6 +116,33 @@ export default function HomepageSettings({ data, updatePreview }) {
           </select>
         </div>
       </div>
+	  
+	  {/* SEASONAL PROMOTION */}
+		<div className="settings-section">
+		  <div className="section-title-row">
+			<h4>Seasonal Promotion</h4>
+			<label className="switch">
+			  <input
+				type="checkbox"
+				checked={data.showSeasonalPromo}
+				onChange={(e) => handleChange("showSeasonalPromo", e.target.checked)}
+			  />
+			  <span className="slider round"></span>
+			</label>
+		</div>
+
+  {data.showSeasonalPromo && (
+    <div className="settings-field">
+      <label>Promo Message</label>
+      <input
+        type="text"
+        placeholder="e.g. Use code SPRING15 for 15% off!"
+        value={data.seasonalPromoMessage || ""}
+        onChange={(e) => handleChange("seasonalPromoMessage", e.target.value)}
+      />
+    </div>
+  )}
+</div>
 
       {/* FEATURED ITEMS */}
       <div className="settings-section">
@@ -150,7 +177,7 @@ export default function HomepageSettings({ data, updatePreview }) {
       </div>
 
       <div className="settings-notice">
-        <p>💡 Tip: Use a high-quality photo of a bouncy house for the background image!</p>
+        <p>...</p>
       </div>
     </div>
   );

@@ -54,7 +54,10 @@ export default function AdminSettings() {
     announcement: "Now booking for Summer 2026!",
     showAnnouncement: true,
     showFeatured: true,
-    featuredItems: []
+    featuredItems: [],
+	showSeasonalPromo: false,
+	seasonalPromoMessage: "",
+
   });
 
   // 2. FETCH DATA FROM FIREBASE ON MOUNT

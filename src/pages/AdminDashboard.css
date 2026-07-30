@@ -1,3 +1,47 @@
+/* Dashboard shell */
+.admin-dashboard-container {
+  position: relative;
+  min-height: 100%;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(255, 221, 64, 0.22), transparent 28%),
+    radial-gradient(circle at 88% 18%, rgba(0, 209, 255, 0.18), transparent 30%),
+    linear-gradient(145deg, #edfdf4 0%, #f7fffb 48%, #eefaff 100%);
+  overflow: hidden;
+}
+
+.sparkle-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.95) 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(253, 210, 43, 0.45) 1px, transparent 1.5px);
+  background-position: 0 0, 22px 26px;
+  background-size: 48px 48px;
+}
+
+.glass-content-wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.52);
+  box-shadow: 0 22px 60px rgba(20, 83, 63, 0.10);
+  backdrop-filter: blur(18px);
+}
+
+.admin-header-sleek h2 {
+  margin: 0;
+  color: #173f35;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
 /* 1. SCROLLING & LAYOUT FIXES */
 .admin-section-scroll {
   overflow-y: auto !important;
@@ -110,4 +154,138 @@
 .status-Pending { 
   background: #FEFCBF; 
   color: #744210; 
+}
+/* Ensure the button is physically clickable */
+.header-action-btns {
+  position: relative;
+  z-index: 10; /* Lifts it above the sparkle/glass layers */
+}
+
+.create-booking-btn {
+  pointer-events: auto !important; /* Forces clickability */
+  cursor: pointer;
+  border: 0;
+  border-radius: 14px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #ffd43b, #ffb703);
+  color: #263238;
+  font-weight: 900;
+  box-shadow: 0 7px 18px rgba(255, 183, 3, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.create-booking-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(255, 183, 3, 0.38);
+}
+
+@media (max-width: 760px) {
+  .admin-header-sleek-container {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .header-action-btns {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .glass-content-wrapper {
+    padding: 14px;
+    border-radius: 20px;
+  }
+}
+
+/* Ensure the Modal sits at the very top of everything */
+.modal-overlay {
+  z-index: 9999 !important;
+}
+.modal-overlay {
+  position: fixed !important; /* Forces it to stay relative to the screen, not the card */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8) !important; /* Darkens the background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999 !important; /* Higher than 'glass-content-wrapper' */
+  backdrop-filter: blur(10px); /* Blurs Buzzy's dashboard behind it */
+}
+
+.modal {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 650px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  z-index: 100000;
+  color: #333; /* Make sure text isn't white-on-white */
+}
+/* Layout grid */
+.admin-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  height: 100vh;
+  background: #f5f6fa;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.admin-sidebar {
+  background: var(--buzzy-green-mid); /* branded green */
+  color: var(--buzzy-black);
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  transition: width 0.3s ease;
+  min-height: 100vh;
+}
+
+.admin-sidebar.collapsed {
+  width: 60px;
+  background: var(--buzzy-green-light); /* softer green when collapsed */
+}
+
+.admin-sidebar h2 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.admin-sidebar a {
+  color: #333;
+  text-decoration: none;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  transition: 0.2s;
+  font-size: 1rem;
+}
+
+.admin-sidebar a:hover {
+  background: var(--buzzy-yellow-bold);
+  color: #000;
+}
+
+/* Responsive collapse instead of hide */
+@media (max-width: 900px) {
+  .admin-layout {
+    grid-template-columns: 60px 1fr;
+  }
+
+  .admin-sidebar {
+    width: 60px;
+    background: var(--buzzy-green-light);
+  }
+
+  .admin-sidebar h2,
+  .admin-sidebar .nav-label {
+    display: none;
+  }
 }

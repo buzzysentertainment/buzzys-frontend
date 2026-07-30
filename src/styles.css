@@ -29,6 +29,70 @@
     var(--buzzy-yellow)
   );
 }
+:root {
+  --footer-color: var(--buzzy-green-mid); /* default for homepage */
+}
+/* ------------------------------------------------------ */
+/* --- ROOT RESPONSIVE LAYOUT --- */
+/* ------------------------------------------------------ */
+
+/* Universal reset */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* Prevent sideways scroll */
+}
+
+/* Fluid container */
+.wrapper {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Images & media auto-fit */
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Typography scaling */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0.5rem 0;
+  line-height: 1.2;
+}
+
+/* ------------------------------------------------------ */
+/* --- RESPONSIVE BREAKPOINTS --- */
+/* ------------------------------------------------------ */
+
+/* Mobile first */
+@media (max-width: 480px) {
+  html { font-size: 14px; }
+  .wrapper { padding: 0.5rem; }
+}
+
+/* Tablets */
+@media (min-width: 481px) and (max-width: 1024px) {
+  html { font-size: 15px; }
+  .wrapper { padding: 1rem; }
+}
+
+/* Laptops & desktops */
+@media (min-width: 1025px) {
+  html { font-size: 16px; }
+  .wrapper { padding: 2rem; }
+}
 
 /* ------------------------------------------------------ */
 /* --- GLOBAL --- */
@@ -424,7 +488,13 @@ body {
     padding: 8px 16px;
   }
 }
-
+/* Custom Upscaled Size for the Hero Quote Button */
+.btn-book.btn-hero-quote {
+  padding: 18px 45px !important;    /* Larger, prominent clickable bubble */
+  font-size: 24px !important;       /* Massive, unmissable text size */
+  font-weight: 800 !important;      /* Extra bold brand presence */
+  letter-spacing: 0.5px;
+}
 /* ------------------------------------------------------ */
 /* --- TABLET ADJUSTMENTS --- */
 /* ------------------------------------------------------ */
@@ -436,4 +506,49 @@ body {
   .buzzy-title {
     font-size: 2.5rem;
   }
+}
+.free-bee {
+  position: fixed;
+  top: 25%;
+  left: 15%;
+  width: 18px;
+  height: auto;
+  z-index: 9999;
+  pointer-events: none;
+}
+.free-bee img {
+  width: 24px;
+  height: auto;
+}
+@media (max-width: 480px) {
+  .free-bee img {
+    width: 12px;
+  }
+}
+@media (min-width: 481px) and (max-width: 768px) {
+  .free-bee img {
+    width: 15px;
+  }
+}
+@media (max-width: 480px) {
+  :root {
+    --scale: 0.75;        /* shrink everything */
+    --font-scale: 0.8;
+    --radius-scale: 0.8;
+    --shadow-scale: 0.7;
+  }
+}
+@media (min-width: 481px) and (max-width: 1024px) {
+  :root {
+    --scale: 0.9;
+    --font-scale: 0.9;
+    --radius-scale: 0.9;
+    --shadow-scale: 0.85;
+  }
+}
+:root {
+  --scale: 1;
+  --font-scale: 1;
+  --radius-scale: 1;
+  --shadow-scale: 1;
 }

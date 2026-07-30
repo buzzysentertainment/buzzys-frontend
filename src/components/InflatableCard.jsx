@@ -17,10 +17,18 @@ export default function InflatableCard({ item, onBook, hideMoreInfo, ...props })
   const [showInfo, setShowInfo] = useState(false);
   const [selectedColor, setSelectedColor] = useState("Standard White");
 
+  // ✅ FIXED: Properly closed useState + added servings support
+  const [selectedServings, setSelectedServings] = useState(
+    item?.servingsOptions ? item.servingsOptions[0] : null
+  );
+
   if (!title) return null;
 
   const basePrice = mode === "wet" ? wet : dry;
-  const totalPrice = basePrice;
+
+  // ✅ Add extra syrup cost if selected
+  const totalPrice = basePrice + (selectedServings?.extraCost || 0);
+
   const foamColors = ["Standard White", "UV Glow", "Pink", "Blue", "Green"];
 
   // Styling variable for the blue theme
@@ -48,7 +56,6 @@ export default function InflatableCard({ item, onBook, hideMoreInfo, ...props })
 
       {wet && (
         <div className="wet-dry-toggle">
-          {/* Apply blue style to active toggle */}
           <button 
             className={mode === "dry" ? "active" : ""} 
             onClick={() => setMode("dry")}
@@ -66,6 +73,7 @@ export default function InflatableCard({ item, onBook, hideMoreInfo, ...props })
         </div>
       )}
 
+      {/* FOAM COLOR SELECTOR */}
       {category === "Foam Parties" && (
         <div className="custom-option" style={{ margin: "10px 0" }}>
           <label style={{ display: "block", fontSize: "0.8rem", marginBottom: "4px" }}>Foam Color:</label>
@@ -79,11 +87,31 @@ export default function InflatableCard({ item, onBook, hideMoreInfo, ...props })
         </div>
       )}
 
+      {/* 🍧 SNOW CONE SERVINGS SELECTOR */}
+      {item?.servingsOptions && (
+        <div className="custom-option" style={{ margin: "10px 0" }}>
+          <label style={{ display: "block", fontSize: "0.8rem", marginBottom: "4px" }}>
+            Servings:
+          </label>
+
+          <select
+            value={item.servingsOptions.indexOf(selectedServings)}
+            onChange={(e) => setSelectedServings(item.servingsOptions[e.target.value])}
+            style={{ width: "100%", padding: "5px", borderRadius: "5px", border: "1px solid #ccc" }}
+          >
+            {item.servingsOptions.map((opt, index) => (
+              <option key={index} value={index}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+
       <p className="item-price">
         ${totalPrice} {wet && <span className="mode-label">({mode})</span>}
       </p>
 
-      {/* FIXED: This button now only shows if hideMoreInfo is NOT true */}
       {!hideMoreInfo && (
         <button 
           className="more-info-btn" 
@@ -113,7 +141,9 @@ export default function InflatableCard({ item, onBook, hideMoreInfo, ...props })
             ...displayItem,
             mode,
             price: totalPrice,
-            selectedColor: category === "Foam Parties" ? selectedColor : null
+            selectedColor: category === "Foam Parties" ? selectedColor : null,
+            servings: selectedServings?.servings || 0,
+            extraCost: selectedServings?.extraCost || 0
           })
         }
       >

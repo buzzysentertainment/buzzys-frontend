@@ -1,7 +1,9 @@
 import { useState } from "react";
+import "./AdminLayout.css";
 
 export default function Sidebar({ onSectionChange }) {
   const [activeTab, setActiveTab] = useState("bookings");
+  const [collapsed, setCollapsed] = useState(false); // new state for collapsing
 
   const handleNavClick = (section) => {
     setActiveTab(section);
@@ -16,22 +18,31 @@ export default function Sidebar({ onSectionChange }) {
   ];
 
   return (
-    <div className="admin-sidebar">
+    <div className={`admin-sidebar ${collapsed ? "collapsed" : ""}`}>
       <div className="sidebar-logo">
         <span className="logo-icon">🐝</span>
         <h2>Buzzy Admin</h2>
+        {/* Collapse toggle button */}
+        <button
+          className="collapse-btn"
+          onClick={() => setCollapsed(!collapsed)}
+        >
+          {collapsed ? "➡️" : "⬅️"}
+        </button>
       </div>
 
       <nav className="sidebar-nav">
         {navItems.map((item) => (
           <button
             key={item.id}
-            /* Logic: Dynamically adds 'active' AND a specific color class like 'bookings-active' */
-            className={`nav-item-flair ${activeTab === item.id ? `active ${item.id}-active` : ""}`}
+            className={`nav-item-flair ${
+              activeTab === item.id ? `active ${item.id}-active` : ""
+            }`}
             onClick={() => handleNavClick(item.id)}
           >
             <span className="nav-icon">{item.icon}</span>
-            <span className="nav-label">{item.label}</span>
+            {/* Hide labels when collapsed */}
+            {!collapsed && <span className="nav-label">{item.label}</span>}
             {activeTab === item.id && <div className="active-glow" />}
           </button>
         ))}
@@ -40,7 +51,7 @@ export default function Sidebar({ onSectionChange }) {
       <div className="sidebar-footer">
         <button className="nav-item-flair logout-btn">
           <span className="nav-icon">🚪</span>
-          <span className="nav-label">Logout</span>
+          {!collapsed && <span className="nav-label">Logout</span>}
         </button>
       </div>
     </div>

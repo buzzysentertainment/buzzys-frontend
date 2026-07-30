@@ -19,6 +19,6 @@ export const PRICES = {
 
   // ADD‑ONS & FLAT‑RATE ITEMS
   softPlay: { price: 320 },
-  foamBlaster: { price: 275, extra6Hours: 125 },
+  foamBlaster: { price: 275, extra6Hours: 125, firstHour: 275, additionalHour: 125 },
   snowCone: { price: 90, extraSyrup: 25 }
 };

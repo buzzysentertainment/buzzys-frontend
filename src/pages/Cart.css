@@ -333,7 +333,38 @@
   z-index: 0;
   pointer-events: none;
 }
+/* Update the Confirm Address button */
+.bubble-btn.yellow {
+  border-radius: 50px; /* Pill shape */
+  border: none;
+  box-shadow: none; /* Removes the 3D blocky effect */
+  height: 45px;     /* Match the height of your inputs */
+  transition: transform 0.2s, background-color 0.2s;
+}
 
+/* Update the Promo Apply button */
+.bubble-btn-sm.yellow {
+  border-radius: 50px; /* Pill shape */
+  border: none;
+  box-shadow: none;    /* Removes the 3D look to keep it flat and sleek */
+  padding: 0 25px;     /* Extra side padding for the pill look */
+  height: 38px;        /* Match the height of the promo input wrapper */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Optional: Add a subtle hover effect since we removed the shadow */
+.bubble-btn.yellow:hover, 
+.bubble-btn-sm.yellow:hover {
+  background-color: #f1c40f;
+  transform: scale(1.02);
+}
+
+.bubble-btn.yellow:active, 
+.bubble-btn-sm.yellow:active {
+  transform: scale(0.98);
+}
 /* Second balloon with different color + timing */
 .buzzy-cart-page::after {
   left: 70%;

@@ -8,8 +8,8 @@
  */
 
 const {setGlobalOptions} = require("firebase-functions");
-const {onRequest} = require("firebase-functions/https");
-const logger = require("firebase-functions/logger");
+const functions = require("firebase-functions");
+const axios = require("axios");
 
 // For cost control, you can set the maximum number of containers that can be
 // running at the same time. This helps mitigate the impact of unexpected
@@ -21,7 +21,7 @@ const logger = require("firebase-functions/logger");
 // functions should each use functions.runWith({ maxInstances: 10 }) instead.
 // In the v1 API, each function can only serve one request per container, so
 // this will be the maximum concurrent request count.
-setGlobalOptions({ maxInstances: 10 });
+setGlobalOptions({maxInstances: 10});
 
 // Create and deploy your first functions
 // https://firebase.google.com/docs/functions/get-started
@@ -30,3 +30,16 @@ setGlobalOptions({ maxInstances: 10 });
 //   logger.info("Hello logs!", {structuredData: true});
 //   response.send("Hello from Firebase!");
 // });
+// DAILY AUTOPAY SCHEDULER
+exports.dailyAutopay = functions.pubsub
+    .schedule("every day 07:00")
+    .timeZone("America/Chicago")
+    .onRun(async () => {
+      try {
+        await axios.get("https://buzzys-backend.onrender.com/book/run-autopay");
+        console.log("Autopay triggered successfully");
+      } catch (err) {
+        console.error("Autopay failed:", err);
+        throw err;
+      }
+    });

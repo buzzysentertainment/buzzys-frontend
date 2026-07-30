@@ -1,0 +1,151 @@
+/* --- RESPONSIVE BREAKPOINTS --- */
+@media (max-width: 768px) {
+  .admin-grid {
+    grid-template-columns: 1fr; /* stack sidebar + main */
+  }
+
+  .admin-content {
+    padding: 15px;
+  }
+
+  .admin-sidebar {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-content {
+    padding: 10px;
+  }
+
+  .admin-main,
+  .admin-sidebar {
+    padding: 15px;
+  }
+
+  .admin-grid {
+    gap: 12px;
+  }
+}
+/* --- MOBILE ADMIN OVERRIDES --- */
+@media (max-width: 768px) {
+  /* Collapse grids into single column */
+  .admin-grid,
+  .modal-details-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px;
+  }
+
+  /* Make modals and containers fit screen */
+  .admin-modal,
+  .admin-page-container,
+  .admin-settings-layout {
+    width: 95% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    border-radius: 12px;
+    padding: 16px;
+    overflow-y: auto;
+  }
+
+  /* Buttons full width for touch */
+  .modal-btn,
+  .admin-notes button,
+  .publish-btn {
+    width: 100% !important;
+  }
+
+  /* Sidebar stacks above main */
+  .settings-sidebar,
+  .admin-sidebar {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Scale down text and padding */
+  .admin-modal-header h3,
+  .sidebar-header h2 {
+    font-size: 1rem;
+  }
+
+  .admin-content,
+  .settings-sidebar,
+  .admin-main {
+    padding: 12px;
+  }
+
+  .modal-edit-field label,
+  .theme-field label {
+    font-size: 0.8rem;
+  }
+
+  .admin-modal-select,
+  .admin-modal-textarea,
+  .modal-edit-field input,
+  .modal-edit-field textarea {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}
+.sidebar {
+  width: 220px;
+  min-width: 60px; /* collapsed size */
+  transition: width 0.3s ease;
+  overflow: hidden;
+}
+
+.sidebar.collapsed {
+  width: 60px;
+}
+
+.sidebar .handle {
+  cursor: ew-resize;
+  width: 5px;
+  background: #ccc;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.admin-sidebar {
+  width: 220px;
+  transition: width 0.3s ease;
+}
+
+.admin-sidebar.collapsed {
+  width: 60px;
+}
+
+.admin-sidebar.collapsed .nav-label,
+.admin-sidebar.collapsed h2 {
+  display: none;
+}
+
+.collapse-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+}
+.admin-sidebar {
+  width: 220px;
+  transition: width 0.3s ease;
+}
+
+.admin-sidebar.collapsed {
+  width: 60px;
+}
+
+.admin-sidebar.collapsed .nav-label,
+.admin-sidebar.collapsed h2 {
+  display: none;
+}
+
+.collapse-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+}
