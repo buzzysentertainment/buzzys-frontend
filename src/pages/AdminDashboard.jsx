@@ -17,6 +17,7 @@ import {
   fetchBookingsByItem,
   fetchBookingsByStatus,
   startKeepAlive,
+  backfillBookingMileage,
   sortBookingsNewestFirst, // ⭐ Logic imported from your API util
 } from "../utils/adminApi";
 
@@ -25,6 +26,7 @@ export default function AdminDashboard() {
   const [section, setSection] = useState("bookings");
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [backfillingMileage, setBackfillingMileage] = useState(false);
   
   // 1. Logic Intact: WAKE UP THE SERVER
   useEffect(() => {
@@ -83,6 +85,30 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleMileageBackfill = async () => {
+    const confirmed = window.confirm(
+      "Calculate mileage for bookings that have an address but no saved mileage? Existing mileage and historical totals will not be changed."
+    );
+    if (!confirmed) return;
+
+    setBackfillingMileage(true);
+    try {
+      const response = await backfillBookingMileage();
+      const { updated, skipped, failed } = response.data;
+      await loadBookings();
+      window.alert(
+        `Mileage backfill complete.\nUpdated: ${updated}\nSkipped: ${skipped}\nFailed: ${failed}`
+      );
+    } catch (error) {
+      console.error("Mileage backfill failed:", error);
+      window.alert(
+        error.response?.data?.detail || "Mileage backfill failed. Please try again."
+      );
+    } finally {
+      setBackfillingMileage(false);
+    }
+  };
+
   return (
     <AdminLayout onSectionChange={setSection}>
       <div className="admin-dashboard-container sparkle-bg">
@@ -101,6 +127,13 @@ export default function AdminDashboard() {
                   </div>
                   
                   <div className="header-action-btns" style={{ display: 'flex', gap: '10px' }}>
+                    <button
+                      className="mileage-backfill-btn"
+                      onClick={handleMileageBackfill}
+                      disabled={backfillingMileage}
+                    >
+                      {backfillingMileage ? "Calculating Mileage..." : "Fill Missing Mileage"}
+                    </button>
                     <button
                       className="create-booking-btn"
 					  onClick={() => navigate("/admin/bookings/new")}

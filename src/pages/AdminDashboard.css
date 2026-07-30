@@ -179,6 +179,28 @@
   box-shadow: 0 10px 24px rgba(255, 183, 3, 0.38);
 }
 
+.mileage-backfill-btn {
+  border: 1px solid rgba(0, 145, 174, 0.2);
+  border-radius: 14px;
+  padding: 12px 18px;
+  background: linear-gradient(135deg, #dff8ff, #b9f0ff);
+  color: #075d70;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 7px 18px rgba(0, 174, 209, 0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mileage-backfill-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 174, 209, 0.28);
+}
+
+.mileage-backfill-btn:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
 @media (max-width: 760px) {
   .admin-header-sleek-container {
     align-items: flex-start;

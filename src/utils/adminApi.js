@@ -21,6 +21,9 @@ API.interceptors.request.use((config) => {
 export function fetchAllBookings() {
   return API.get("/admin/bookings");
 }
+export function backfillBookingMileage() {
+  return API.post("/admin/bookings/backfill-mileage");
+}
 export function createBooking(data) {
 	return API.post("/admin/bookings", data);
 }
