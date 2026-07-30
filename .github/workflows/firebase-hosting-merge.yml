@@ -8,27 +8,25 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
 
       # Install and build the React frontend
       - name: Install frontend dependencies
-        working-directory: ./
-        run: npm ci
+        run: npm ci || (npm cache clean --force && npm ci)
 
       - name: Build frontend
-        working-directory: ./
         run: npm run build
 
-      # Install Firebase Functions dependencies
-      - name: Install functions dependencies
-        working-directory: ./functions
-        run: npm ci
-
-      # Deploy Hosting + Functions
+      # This action deploys Firebase Hosting. Functions are deployed separately.
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BUZZYSDATABASE }}
           channelId: live
           projectId: buzzysdatabase
-
