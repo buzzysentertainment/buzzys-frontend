@@ -24,6 +24,8 @@ export default function BookingsTable({ bookings, onUpdated }) {
             <tr>
               <th>Customer</th>
               <th>Item(s)</th>
+              <th style={{ textAlign: "center" }}>Setup</th>
+              <th style={{ textAlign: "center" }}>Mileage</th>
               <th>Date</th>
               <th>Status</th>
               <th>Total</th>
@@ -47,11 +49,25 @@ export default function BookingsTable({ bookings, onUpdated }) {
                 b.items && b.items.length > 0
                   ? b.items.map((i) => i.title || i.name).join(", ")
                   : b.item || "—";
+              const itemModes = (b.items || [])
+                .map((item) => String(item.mode || "").toLowerCase())
+                .filter((mode) => mode === "wet" || mode === "dry");
+              const setupType = itemModes.length
+                ? new Set(itemModes).size > 1 ? "mixed" : itemModes[0]
+                : String(b.setupType || b.mode || "dry").toLowerCase();
+              const setupLabel =
+                setupType === "mixed" ? "WET + DRY" : setupType.toUpperCase();
 
               return (
                 <tr key={b.booking_id || b.id || b.created_at || Math.random()}>
                   <td><strong>{resolvedName}</strong></td>
                   <td>{resolvedItems}</td>
+                  <td style={{ textAlign: "center" }}>{setupLabel}</td>
+                  <td style={{ textAlign: "center" }}>
+                    {b.distance === undefined || b.distance === null
+                      ? "—"
+                      : `${Number(b.distance)} mi`}
+                  </td>
                   <td>{resolvedDate}</td>
                   <td>
                     <span className={`status-badge status-${b.status}`}>

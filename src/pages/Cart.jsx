@@ -19,6 +19,9 @@ export default function Cart({ cart, bookingDate, removeFromCart, clearCart }) {
   const [promoMessage, setPromoMessage] = useState("");
   const [discount, setDiscount] = useState(0);
   const [percentOff, setPercentOff] = useState(0);
+  const [distance, setDistance] = useState(null);
+  const [mileageFee, setMileageFee] = useState(0);
+  const [isCalculatingMileage, setIsCalculatingMileage] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "", 
@@ -77,14 +80,50 @@ export default function Cart({ cart, bookingDate, removeFromCart, clearCart }) {
       return acc + itemPrice;
     }, 0);
 
-    const waiverFee = formData.damageWaiver ? Number((rawSubtotal * 0.08).toFixed(2)) : 0;
-    const subtotal = rawSubtotal + waiverFee;
-    const deposit = Number((subtotal * 0.35).toFixed(2));
-    const remainingBalance = Number((subtotal - deposit).toFixed(2));
-    return { rawSubtotal, waiverFee, subtotal, deposit, remainingBalance };
+    const percentDiscount = rawSubtotal * (percentOff / 100);
+    const discountedSubtotal = Math.max(0, rawSubtotal - discount - percentDiscount);
+    const waiverFee = formData.damageWaiver
+      ? Number((discountedSubtotal * 0.08).toFixed(2))
+      : 0;
+    const salesTax = Number(((discountedSubtotal + waiverFee + mileageFee) * 0.07).toFixed(2));
+    const finalTotal = Number((discountedSubtotal + waiverFee + mileageFee + salesTax).toFixed(2));
+    const deposit = 75;
+    const remainingBalance = Math.max(0, Number((finalTotal - deposit).toFixed(2)));
+    return { rawSubtotal, waiverFee, percentDiscount, salesTax, finalTotal, deposit, remainingBalance };
   };
 
-  const { rawSubtotal, waiverFee, subtotal } = calculatePricing();
+  const { rawSubtotal, waiverFee, percentDiscount, salesTax, finalTotal, deposit, remainingBalance } = calculatePricing();
+
+  const handleConfirmAddress = async () => {
+    const { address, city, state, zip } = formData;
+    if (!address || !city || !state || !zip) {
+      alert("Please enter the complete delivery address.");
+      return;
+    }
+    setIsCalculatingMileage(true);
+    try {
+      const response = await axios.post("https://buzzys-backend.onrender.com/utils/distance/", {
+        origin: "69 Thompson Road SE, Silver Creek, GA 30173",
+        destination: `${address}, ${city}, ${state} ${zip}`
+      });
+      const miles = Math.round(Number(response.data.distance) || 0);
+      const oneWayFee =
+        miles <= 10 ? 0 :
+        miles <= 20 ? 10 :
+        miles <= 30 ? 20 :
+        miles <= 40 ? 27 :
+        27 + (miles - 40) * 3;
+      setDistance(miles);
+      setMileageFee(oneWayFee * 4);
+    } catch (error) {
+      console.error("Distance lookup failed:", error);
+      setDistance(null);
+      setMileageFee(0);
+      alert("Distance lookup failed. Please check the address and try again.");
+    } finally {
+      setIsCalculatingMileage(false);
+    }
+  };
 
   const applyPromo = async () => {
     try {
@@ -107,18 +146,13 @@ export default function Cart({ cart, bookingDate, removeFromCart, clearCart }) {
     }
   };
 
-  const percentDiscount = rawSubtotal * (percentOff / 100);
-  const finalTotal = Math.max(0, subtotal - discount - percentDiscount);
-  const discountedSubtotal = finalTotal;
-  const discountedDeposit = Number((discountedSubtotal * 0.35).toFixed(2));
-  const discountedRemaining = Number((discountedSubtotal - discountedDeposit).toFixed(2));
-
   const handleCheckout = async (e) => {
     e.preventDefault();
     if (!agreed) return alert("Please read and agree to the Rental Agreement.");
     if (signature.trim().length < 3) return alert("Please enter your signature.");
     if (!formData.date) return alert("Please select a party date!");
     if (availabilityStatus.type === "error") return alert("Some items are unavailable for the selected date.");
+    if (distance === null) return alert("Please confirm the delivery address to calculate mileage.");
 
     setLoading(true);
     try {
@@ -126,26 +160,40 @@ export default function Cart({ cart, bookingDate, removeFromCart, clearCart }) {
         ...item,
         price: parseFloat(item.price.toString().replace(/[^0-9.]/g, ""))
       }));
+      const selectedModes = [...new Set(
+        finalCart
+          .map((item) => item.mode)
+          .filter((mode) => mode === "wet" || mode === "dry")
+      )];
+      const setupType =
+        selectedModes.length === 1
+          ? selectedModes[0]
+          : selectedModes.length > 1 ? "mixed" : "dry";
 
       const bookingData = {
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
+        setupType,
+        mode: setupType,
         address: `${formData.address}, ${formData.city}, ${formData.state} ${formData.zip}`,
         date: formData.date,
         deliveryTime: formData.startTime,
         pickupTime: formData.pickupTime,
         items: finalCart,
-        subtotal: discountedSubtotal,
-        deposit: discountedDeposit,
-        remaining: discountedRemaining,
+        subtotal: rawSubtotal,
+        tax: salesTax,
+        deposit,
+        remaining: remainingBalance,
         waiverFee: waiverFee,
         signature,
         saveCardForAutopay,
         referralType: "None",
         isTaxExempt: false,
         discount,
-        percentOff
+        percentOff,
+        distance,
+        mileageFee
       };
 
       const res = await axios.post("https://buzzys-backend.onrender.com/book/create-checkout", bookingData);
@@ -264,6 +312,15 @@ export default function Cart({ cart, bookingDate, removeFromCart, clearCart }) {
                   />
                 </div>
                 <div className="bubble-input-group" style={{ flex: '0.4' }}>
+                  <label>State *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.state}
+                    onChange={(e) => setFormData({...formData, state: e.target.value})}
+                  />
+                </div>
+                <div className="bubble-input-group" style={{ flex: '0.4' }}>
                   <label>Zip *</label>
                   <input 
                     type="text" 
@@ -272,6 +329,20 @@ export default function Cart({ cart, bookingDate, removeFromCart, clearCart }) {
                     onChange={(e) => setFormData({...formData, zip: e.target.value})} 
                   />
                 </div>
+              </div>
+
+              <div className="bubble-input-group">
+                <button
+                  type="button"
+                  className="bubble-btn yellow"
+                  onClick={handleConfirmAddress}
+                  disabled={isCalculatingMileage}
+                >
+                  {isCalculatingMileage ? "Calculating mileage..." : "Confirm Address & Mileage"}
+                </button>
+                {distance !== null && (
+                  <small>{distance} miles — ${mileageFee.toFixed(2)} mileage fee</small>
+                )}
               </div>
 
               <div className="bubble-input-group">
@@ -468,6 +539,14 @@ export default function Cart({ cart, bookingDate, removeFromCart, clearCart }) {
                     </span>
                   </div>
                 )}
+                <div className="price-row">
+                  <span>Mileage Fee</span>
+                  <span>${mileageFee.toFixed(2)}</span>
+                </div>
+                <div className="price-row">
+                  <span>Sales Tax (7%)</span>
+                  <span>${salesTax.toFixed(2)}</span>
+                </div>
               </div>
 
               <div className="price-divider" />
@@ -478,11 +557,11 @@ export default function Cart({ cart, bookingDate, removeFromCart, clearCart }) {
               </div>
               <div className="price-row deposit">
                 <span>Deposit Due Now</span>
-                <span>${(finalTotal * 0.35).toFixed(2)}</span>
+                <span>${deposit.toFixed(2)}</span>
               </div>
               <div className="price-row balance-due">
                 <span>Balance Due</span>
-                <span>${(finalTotal - (finalTotal * 0.35)).toFixed(2)}</span>
+                <span>${remainingBalance.toFixed(2)}</span>
               </div>
 
               <div 

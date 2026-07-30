@@ -68,6 +68,28 @@ export default function BookingDetailsModal({
     booking.items && booking.items.length > 0
       ? booking.items.map((i) => i.title || i.name).join(", ")
       : booking.item || "—";
+  const pricingBreakdown = booking.pricing_breakdown || {};
+  const pricingSubtotal =
+    pricingBreakdown.subtotal ??
+    booking.subtotal ??
+    (booking.items || []).reduce(
+      (sum, item) => sum + Number(item.price || 0),
+      0
+    );
+  const pricingTax = pricingBreakdown.tax ?? booking.tax ?? 0;
+  const pricingTotal = pricingBreakdown.total ?? booking.total ?? 0;
+  const pricingDeposit = pricingBreakdown.deposit ?? booking.deposit ?? 0;
+  const paymentStatus = String(booking.paymentStatus || "").toLowerCase();
+  const explicitAmountPaid =
+    booking.amountPaid ?? booking.paidAmount ?? booking.paymentAmount;
+  const amountPaid =
+    explicitAmountPaid !== undefined && explicitAmountPaid !== null
+      ? Number(explicitAmountPaid)
+      : ["balance_paid", "paid", "paid_in_full"].includes(paymentStatus)
+        ? Number(pricingTotal)
+        : ["deposit_paid", "confirmed"].includes(paymentStatus)
+          ? Number(pricingDeposit)
+          : 0;
 
   function formatDisplayDate(dateString) {
     if (!dateString) return "TBD";
@@ -264,8 +286,26 @@ export default function BookingDetailsModal({
 
           {/* ITEMS */}
           <div className="modal-items-box">
+            <strong>Items:</strong>
+            {(booking.items || []).length ? (
+              <ul>
+                {booking.items.map((item, index) => (
+                  <li key={`${item.title || item.name || "item"}-${index}`}>
+                    {item.title || item.name || "Unknown item"}
+                    {["wet", "dry"].includes(String(item.mode).toLowerCase()) &&
+                      ` — ${String(item.mode).toUpperCase()}`}
+                  </li>
+                ))}
+              </ul>
+            ) : <p>{resolvedItems}</p>}
+          </div>
+
+          <div className="modal-edit-field">
+            <label>Mileage</label>
             <p>
-              <strong>Items:</strong> {resolvedItems}
+              {booking.distance === undefined || booking.distance === null
+                ? "Not recorded for this booking"
+                : `${Number(booking.distance)} miles — $${Number(booking.mileageFee || 0).toFixed(2)} mileage fee`}
             </p>
           </div>
 
@@ -314,8 +354,20 @@ export default function BookingDetailsModal({
           )}
 
           <div className="modal-pricing-row">
-            <strong>Total Amount:</strong>{" "}
-            <span>${Number(booking.total || 0).toFixed(2)}</span>
+            <strong>Subtotal:</strong>
+            <span>${Number(pricingSubtotal).toFixed(2)}</span>
+          </div>
+          <div className="modal-pricing-row">
+            <strong>Tax:</strong>
+            <span>${Number(pricingTax).toFixed(2)}</span>
+          </div>
+          <div className="modal-pricing-row">
+            <strong>Total:</strong>
+            <span>${Number(pricingTotal).toFixed(2)}</span>
+          </div>
+          <div className="modal-pricing-row">
+            <strong>Customer Paid:</strong>
+            <span>${Number(amountPaid).toFixed(2)}</span>
           </div>
 
           <hr className="modal-divider" />
