@@ -322,6 +322,14 @@ export default function BookingDetailsModal({
         : ["deposit_paid", "confirmed"].includes(paymentStatus)
           ? Number(breakDownDeposit)
           : 0;
+  const isPaidInFull =
+    ["balance_paid", "paid", "paid_in_full"].includes(paymentStatus) ||
+    Number(amountPaid) >= Number(breakDownTotal);
+  const remainingBalance = isPaidInFull
+    ? 0
+    : pricingBreakdown.remaining ??
+      currentBooking.remaining ??
+      Math.max(0, Number(breakDownTotal) - Number(amountPaid));
   
   return (
     <div className="admin-page-wrapper">
@@ -557,6 +565,10 @@ export default function BookingDetailsModal({
             <div className="modal-pricing-row">
               <strong>Customer Paid:</strong>
               <span>${Number(amountPaid).toFixed(2)}</span>
+            </div>
+            <div className="modal-pricing-row remaining-balance-row">
+              <strong>Remaining Balance:</strong>
+              <span>${Number(remainingBalance).toFixed(2)}</span>
             </div>
             {currentBooking.paymentStatus && (
               <div className="modal-pricing-row">

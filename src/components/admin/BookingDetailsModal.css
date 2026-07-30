@@ -144,6 +144,14 @@
   font-weight: 900;
 }
 
+.modal-pricing-row.remaining-balance-row {
+  margin-top: 12px;
+  border: 1px solid rgba(0, 145, 174, 0.2);
+  background: linear-gradient(135deg, #dff8ff, #eefcff);
+  color: #075d70;
+  font-size: 1.06rem;
+}
+
 /* Form fields */
 .modal-edit-field {
   margin-bottom: 18px;
