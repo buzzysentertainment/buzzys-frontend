@@ -17,8 +17,8 @@ export function calculateMileageFee(miles) {
   if (miles <= 10) return 0;       // First 10 miles free
   if (miles <= 20) return 10;      // 11–20 miles = $10
   if (miles <= 30) return 20;      // 21–30 miles = $20
-  if (miles <= 40) return 27;      // 31–40 miles = $27
-  return 27 + (miles - 40) * 3;    // 41+ miles = $27 + $3/mile
+  if (miles <= 40) return 40;      // 31–40 miles = $40
+  return 40 + (miles - 40) * 3;    // 41+ miles = $40 + $3/mile
 }
 
 // ⭐ Fetch distance from backend and return miles + fee
