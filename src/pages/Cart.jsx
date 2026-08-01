@@ -66,7 +66,7 @@ export default function Cart({ cart, bookingDate, removeFromCart, clearCart }) {
 
   const handleBlockedCheckoutClick = () => {
     setBlockedCheckoutClicks((clicks) => clicks + 1);
-    alert("Please Confirm your address by click the confirm address button to proceed to checkout");
+    alert("Please confirm your delivery address by clicking the 'Click Here To Confirm Address' button before proceeding to checkout.");
   };
 
   // --- LOGIC FUNCTIONS ---
