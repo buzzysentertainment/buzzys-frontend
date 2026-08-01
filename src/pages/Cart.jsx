@@ -42,6 +42,25 @@ export default function Cart({ cart, bookingDate, removeFromCart, clearCart }) {
   const [distance, setDistance] = useState(null); 
   const [mileageFee, setMileageFee] = useState(0);
   const [isCalculatingMileage, setIsCalculatingMileage] = useState(false);
+  const [confirmedDeliveryAddress, setConfirmedDeliveryAddress] = useState(null);
+
+  const normalizeDeliveryAddress = ({ address, city, state, zip }) =>
+    [address, city, state, zip]
+      .map((value) => String(value || "").trim().toLowerCase().replace(/\s+/g, " "))
+      .join("|");
+
+  const currentDeliveryAddress = normalizeDeliveryAddress(formData);
+  const isMileageVerified =
+    distance !== null &&
+    confirmedDeliveryAddress === currentDeliveryAddress &&
+    !isCalculatingMileage;
+
+  const handleAddressFieldChange = (field, value) => {
+    setFormData((previous) => ({ ...previous, [field]: value }));
+    setDistance(null);
+    setMileageFee(0);
+    setConfirmedDeliveryAddress(null);
+  };
 
   // --- LOGIC FUNCTIONS ---
 
@@ -112,6 +131,7 @@ export default function Cart({ cart, bookingDate, removeFromCart, clearCart }) {
 	  
 	  setDistance(miles);
 	  setMileageFee(totalMultipliedFee);
+	  setConfirmedDeliveryAddress(normalizeDeliveryAddress(formData));
 	  
 	  setTimeout(() => {
 		setIsCalculatingMileage(false);
@@ -184,7 +204,9 @@ export default function Cart({ cart, bookingDate, removeFromCart, clearCart }) {
     if (signature.trim().length < 3) return alert("Please enter your signature.");
     if (!formData.date) return alert("Please select a party date!");
     if (availabilityStatus.type === "error") return alert("Some items are unavailable.");
-    if (distance === null) return alert("Please confirm the delivery address to calculate mileage.");
+    if (!isMileageVerified) {
+      return alert("Please click Confirm Address to calculate and verify the mileage before checkout.");
+    }
 
     setLoading(true);
     try {
@@ -302,30 +324,36 @@ export default function Cart({ cart, bookingDate, removeFromCart, clearCart }) {
 
               <div className="bubble-input-group">
                 <label>Street Address *</label>
-                <input type="text" required value={formData.address} onChange={(e) => setFormData({...formData, address: e.target.value})} />
+                <input type="text" required value={formData.address} onChange={(e) => handleAddressFieldChange("address", e.target.value)} />
               </div>
 
               <div className="bubble-row">
                 <div className="bubble-input-group">
                   <label>City *</label>
-                  <input type="text" required value={formData.city} onChange={(e) => setFormData({...formData, city: e.target.value})} />
+                  <input type="text" required value={formData.city} onChange={(e) => handleAddressFieldChange("city", e.target.value)} />
                 </div>
                 <div className="bubble-input-group">
                   <label>State *</label>
-                  <input type="text" required value={formData.state} onChange={(e) => setFormData({...formData, state: e.target.value})} />
+                  <input type="text" required value={formData.state} onChange={(e) => handleAddressFieldChange("state", e.target.value)} />
                 </div>
                 <div className="bubble-input-group" style={{ flex: '0.4' }}>
                   <label>Zip *</label>
-                  <input type="text" required value={formData.zip} onChange={(e) => setFormData({...formData, zip: e.target.value})} />
+                  <input type="text" required value={formData.zip} onChange={(e) => handleAddressFieldChange("zip", e.target.value)} />
                 </div>
               </div>
               
               <div style={{ marginTop: '10px', marginBottom: '20px' }}>
                 <button type="button" className="bubble-btn yellow" onClick={handleConfirmAddress} disabled={isCalculatingMileage}>
-                  {isCalculatingMileage ? "Confirming Address... 🐝" : "Click Here To Confirm Address"}
+                  {isCalculatingMileage
+                    ? "Confirming Address... 🐝"
+                    : isMileageVerified
+                      ? `Address Confirmed — ${distance} miles`
+                      : "Click Here To Confirm Address"}
                 </button> 
 				<p className="confirm-helper-text">
-				  We confirm your address to calculate delivery distance and ensure accurate pricing.
+				  {isMileageVerified
+                    ? `Mileage verified. Travel fee: $${mileageFee.toFixed(2)}.`
+                    : "Required before checkout. Editing the address requires confirming it again."}
 				</p>
               </div>
 
@@ -509,7 +537,7 @@ export default function Cart({ cart, bookingDate, removeFromCart, clearCart }) {
                   </label>
                 </div>
 
-                <button type="submit" className="bubble-pay-btn" disabled={loading || isChecking || !agreed || signature.length < 3 || availabilityStatus.type === "error"}>
+                <button type="submit" className="bubble-pay-btn" disabled={loading || isChecking || !isMileageVerified || !agreed || signature.length < 3 || availabilityStatus.type === "error"}>
                   {loading ? "Preparing..." : isChecking ? "Checking..." : `Book My Party!`}
                 </button>
               </div>
