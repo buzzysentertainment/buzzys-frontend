@@ -179,6 +179,60 @@
   text-align: center;
 }
 
+.checkout-button-wrap {
+  position: relative;
+}
+
+.checkout-help-popover {
+  position: absolute;
+  left: calc(100% + 14px);
+  top: 50%;
+  z-index: 20;
+  width: 250px;
+  padding: 14px 16px;
+  transform: translateY(-50%);
+  border: 3px solid var(--buzzy-orange);
+  border-radius: 16px;
+  background: #fffdf2;
+  color: #54240f;
+  box-shadow: 0 8px 24px rgba(84, 36, 15, 0.2);
+  text-align: left;
+}
+
+.checkout-help-popover::before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  border: 10px solid transparent;
+  border-right-color: var(--buzzy-orange);
+  transform: translateY(-50%);
+}
+
+.checkout-help-popover strong,
+.checkout-help-popover span {
+  display: block;
+}
+
+.checkout-help-popover strong {
+  margin-bottom: 6px;
+}
+
+@media (max-width: 1050px) {
+  .checkout-help-popover {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+    margin-top: 12px;
+    transform: none;
+  }
+
+  .checkout-help-popover::before {
+    display: none;
+  }
+}
+
 /* BEE ICON LOGIC */
 .bee-checkout-icon {
   width: 120px;

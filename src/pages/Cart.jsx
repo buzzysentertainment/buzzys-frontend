@@ -43,6 +43,7 @@ export default function Cart({ cart, bookingDate, removeFromCart, clearCart }) {
   const [mileageFee, setMileageFee] = useState(0);
   const [isCalculatingMileage, setIsCalculatingMileage] = useState(false);
   const [confirmedDeliveryAddress, setConfirmedDeliveryAddress] = useState(null);
+  const [blockedCheckoutClicks, setBlockedCheckoutClicks] = useState(0);
 
   const normalizeDeliveryAddress = ({ address, city, state, zip }) =>
     [address, city, state, zip]
@@ -60,6 +61,12 @@ export default function Cart({ cart, bookingDate, removeFromCart, clearCart }) {
     setDistance(null);
     setMileageFee(0);
     setConfirmedDeliveryAddress(null);
+    setBlockedCheckoutClicks(0);
+  };
+
+  const handleBlockedCheckoutClick = () => {
+    setBlockedCheckoutClicks((clicks) => clicks + 1);
+    alert("Please Confirm your address by click the confirm address button to proceed to checkout");
   };
 
   // --- LOGIC FUNCTIONS ---
@@ -132,6 +139,7 @@ export default function Cart({ cart, bookingDate, removeFromCart, clearCart }) {
 	  setDistance(miles);
 	  setMileageFee(totalMultipliedFee);
 	  setConfirmedDeliveryAddress(normalizeDeliveryAddress(formData));
+	  setBlockedCheckoutClicks(0);
 	  
 	  setTimeout(() => {
 		setIsCalculatingMileage(false);
@@ -542,14 +550,25 @@ export default function Cart({ cart, bookingDate, removeFromCart, clearCart }) {
                     <p className="checkout-mileage-notice">
                       Please confirm your address above to calculate mileage before proceeding to checkout.
                     </p>
-                    <button
-                      type="button"
-                      className="bubble-pay-btn mileage-blocked"
-                      aria-disabled="true"
-                      onClick={() => alert("Please Confirm your address by click the confirm address button to proceed to checkout")}
-                    >
-                      Book My Party!
-                    </button>
+                    <div className="checkout-button-wrap">
+                      <button
+                        type="button"
+                        className="bubble-pay-btn mileage-blocked"
+                        aria-disabled="true"
+                        onClick={handleBlockedCheckoutClick}
+                      >
+                        Book My Party!
+                      </button>
+                      {blockedCheckoutClicks >= 3 && (
+                        <aside className="checkout-help-popover" role="status" aria-live="polite">
+                          <strong>Why can’t I check out?</strong>
+                          <span>
+                            Scroll up to the delivery address and click <b>Click Here To Confirm Address</b>.
+                            We must calculate your mileage and travel fee before checkout.
+                          </span>
+                        </aside>
+                      )}
+                    </div>
                   </>
                 ) : (
                   <button type="submit" className="bubble-pay-btn" disabled={loading || isChecking || !agreed || signature.length < 3 || availabilityStatus.type === "error"}>
