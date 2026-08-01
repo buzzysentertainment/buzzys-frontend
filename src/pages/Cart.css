@@ -164,6 +164,20 @@
 
 .bubble-pay-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #e68a00; }
 .bubble-pay-btn:disabled { background: #ccc; box-shadow: none; cursor: not-allowed; }
+.bubble-pay-btn.mileage-blocked {
+  background: #ccc;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.checkout-mileage-notice {
+  margin: 14px 8px 10px;
+  color: #9c2f18;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+}
 
 /* BEE ICON LOGIC */
 .bee-checkout-icon {

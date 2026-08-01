@@ -537,9 +537,25 @@ export default function Cart({ cart, bookingDate, removeFromCart, clearCart }) {
                   </label>
                 </div>
 
-                <button type="submit" className="bubble-pay-btn" disabled={loading || isChecking || !isMileageVerified || !agreed || signature.length < 3 || availabilityStatus.type === "error"}>
-                  {loading ? "Preparing..." : isChecking ? "Checking..." : `Book My Party!`}
-                </button>
+                {!isMileageVerified ? (
+                  <>
+                    <p className="checkout-mileage-notice">
+                      Please confirm your address above to calculate mileage before proceeding to checkout.
+                    </p>
+                    <button
+                      type="button"
+                      className="bubble-pay-btn mileage-blocked"
+                      aria-disabled="true"
+                      onClick={() => alert("Please Confirm your address by click the confirm address button to proceed to checkout")}
+                    >
+                      Book My Party!
+                    </button>
+                  </>
+                ) : (
+                  <button type="submit" className="bubble-pay-btn" disabled={loading || isChecking || !agreed || signature.length < 3 || availabilityStatus.type === "error"}>
+                    {loading ? "Preparing..." : isChecking ? "Checking..." : `Book My Party!`}
+                  </button>
+                )}
               </div>
             </div>
           </form>
